@@ -10,7 +10,12 @@
     "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@app/*": ["src/App/*"],
+      "@pages/*": ["src/pages/*"],
+      "@widgets/*": ["src/widgets/*"],
+      "@features/*": ["src/features/*"],
+      "@entities/*": ["src/entities/*"],
+      "@shared/*": ["src/shared/*"],
     },
     "strict": true,
     "esModuleInterop": true,
@@ -18,7 +23,7 @@
     "isolatedModules": true,
     "lib": [
       "es2021",
-      "dom",
+      "dom"
     ]
   },
   "ts-node": {
@@ -30,5 +35,7 @@
     "./config/jest/setupTests.ts",
     "./src/**/*.ts",
     "./src/**/*.tsx",
+    "./**/*.tsx",
   ],
+  "extends": "expo/tsconfig.base"
 }

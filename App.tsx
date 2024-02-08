@@ -1,5 +1,11 @@
-import { App } from './src/app/App';
+import React from 'react';
+import {App} from '@app/App'
+import { ThemeProvider } from '@rneui/themed';
 
 export default function Index() {
-  return <App/>
+  return (
+    <ThemeProvider>
+      <App/>
+    </ThemeProvider>
+  )
 }
