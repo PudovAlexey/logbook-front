@@ -14,10 +14,12 @@
     "@rneui/themed": "^4.0.0-rc.8",
     "expo": "~50.0.6",
     "expo-status-bar": "~1.11.1",
+    "i18next": "^23.8.2",
     "mobx": "^6.12.0",
     "mobx-react-lite": "^4.0.5",
     "react": "18.2.0",
     "react-dom": "^18.2.0",
+    "react-i18next": "^14.0.5",
     "react-native": "0.73.4",
     "react-native-web": "^0.19.10"
   },

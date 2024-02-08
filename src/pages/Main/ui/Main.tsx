@@ -1,14 +1,17 @@
 import React from 'react'
 import { Tab, Text, TabView } from '@rneui/themed';
 import { View, StyleSheet } from 'react-native';
+import { useTranslation } from 'react-i18next';
+import { tokens } from '@app/providers/LanguageProvider/tokens/tokens';
 
 function Main() {
+   const {t} = useTranslation();
     const [index, setIndex] = React.useState(0);
     return (
         <View style={styles.container}>     
           <TabView value={index} onChange={setIndex} animationType="spring">
             <TabView.Item style={{ backgroundColor: 'red', width: '100%' }}>
-              <Text h1>Recent</Text>
+              <Text h1>{t(tokens.test.token, {[tokens.test.parameters.count]: 12})}</Text>
             </TabView.Item>
             <TabView.Item style={{ backgroundColor: 'blue', width: '100%' }}>
               <Text h1>Favorite</Text>
@@ -32,12 +35,12 @@ function Main() {
               icon={{ name: 'timer', type: 'ionicon', color: 'white' }}
             />
             <Tab.Item
-              title="favorite"
+              title="map"
               titleStyle={{ fontSize: 12 }}
               icon={{ name: 'heart', type: 'ionicon', color: 'white' }}
             />
             <Tab.Item
-              title="cart"
+              title="ekip"
               titleStyle={{ fontSize: 12 }}
               icon={{ name: 'cart', type: 'ionicon', color: 'white' }}
             />
