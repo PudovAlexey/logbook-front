@@ -3,10 +3,12 @@ import { Tab, Text, TabView } from '@rneui/themed';
 import { View, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { tokens } from '@app/providers/LanguageProvider/tokens/tokens';
-
+import { useQuery } from '@shared/lib/queryHooks/useQuery';
+import { logbookEndpoints } from '@app/providers/QueryClientProvider/endpoints/logbook';
 function Main() {
    const {t} = useTranslation();
     const [index, setIndex] = React.useState(0);
+
     return (
         <View style={styles.container}>     
           <TabView value={index} onChange={setIndex} animationType="spring">

@@ -2,12 +2,15 @@ import { Main } from '@pages/Main';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { LanguageProvider } from './providers/LanguageProvider/LanguageProvider';
+import { QueryClientProvider } from './providers/QueryClientProvider/QueryClientProvider';
 
 function App() {
   return (
-    <LanguageProvider>
+   <QueryClientProvider>
+     <LanguageProvider>
       <Main/>
     </LanguageProvider>
+   </QueryClientProvider>
   )
 }
 
