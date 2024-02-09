@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { tokens } from '@app/providers/LanguageProvider/tokens/tokens';
 import { useQuery } from '@shared/lib/queryHooks/useQuery';
 import { logbookEndpoints } from '@app/providers/QueryClientProvider/endpoints/logbook';
+import { useLazyQuery } from '@shared/lib/queryHooks/useLazyQuery';
 function Main() {
    const {t} = useTranslation();
     const [index, setIndex] = React.useState(0);
