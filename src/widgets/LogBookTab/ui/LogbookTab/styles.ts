@@ -25,15 +25,15 @@ const styles = StyleSheet.create({
         borderColor: 'blue',
       },
 
-    card: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 15,
-        height: 250,
-        width: '45%',
-        backgroundColor: 'green'
-    }
+    // card: {
+    //     display: 'flex',
+    //     justifyContent: 'center',
+    //     alignItems: 'center',
+    //     borderRadius: 15,
+    //     height: 250,
+    //     width: '45%',
+    //     backgroundColor: 'green'
+    // }
 })
 
 export {

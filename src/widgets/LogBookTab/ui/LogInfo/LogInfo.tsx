@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import { HStack } from '@shared/ui/HStack/HStack';
 import {Text} from '@rneui/themed';
 import { Input } from '@shared/ui/Input/Input';
+import { SearchField } from '@shared/ui/SearchField/SearchField';
 
 function LogInfo() {
   return (
@@ -22,7 +23,7 @@ function LogInfo() {
        </HStack>
         </View>
         <View style={styles.mainBox}>
-        <Input/>
+        <SearchField/>
         <View style={styles.circleBox}><Text>Circle</Text></View>
         </View>
     </View>

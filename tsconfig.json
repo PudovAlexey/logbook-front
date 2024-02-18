@@ -16,6 +16,7 @@
       "@features/*": ["src/features/*"],
       "@entities/*": ["src/entities/*"],
       "@shared/*": ["src/shared/*"],
+      "@assets/*": ["assets/*"],
     },
     "strict": true,
     "esModuleInterop": true,
@@ -35,7 +36,7 @@
     "./config/jest/setupTests.ts",
     "./src/**/*.ts",
     "./src/**/*.tsx",
-    "./**/*.tsx",
+    "./**/*.tsx", "themed.d.ts",
   ],
   "extends": "expo/tsconfig.base"
 }
