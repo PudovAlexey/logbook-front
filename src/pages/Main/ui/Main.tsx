@@ -6,15 +6,16 @@ import { tokens } from '@app/providers/LanguageProvider/tokens/tokens';
 import { useQuery } from '@shared/lib/queryHooks/useQuery';
 import { logbookEndpoints } from '@app/providers/QueryClientProvider/endpoints/logbook';
 import { useLazyQuery } from '@shared/lib/queryHooks/useLazyQuery';
+import { LogbookTab } from '@widgets/LogBookTab/ui/LogbookTab/LogbookTab';
 function Main() {
-   const {t} = useTranslation();
+  //  const {t} = useTranslation();
     const [index, setIndex] = React.useState(0);
 
     return (
         <View style={styles.container}>     
           <TabView value={index} onChange={setIndex} animationType="spring">
             <TabView.Item style={{ backgroundColor: 'red', width: '100%' }}>
-              <Text h1>{t(tokens.test.token, {[tokens.test.parameters.count]: 12})}</Text>
+              <LogbookTab/>
             </TabView.Item>
             <TabView.Item style={{ backgroundColor: 'blue', width: '100%' }}>
               <Text h1>Favorite</Text>
