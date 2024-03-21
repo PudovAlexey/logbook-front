@@ -8,25 +8,24 @@ import { FontProvider } from './providers/FontProvider/FontProvider';
 import { UserProvider } from './providers/UserProvider/ui/UserProvider';
 import { Header } from './ui/Header/Header';
 import { styles } from './styles';
+import { NavigationContainer } from '@react-navigation/native';
+import { NavigationProvider } from './providers/NavigationProvider/NavigationProvider';
 
 function App() {
   return (
-    <UserProvider>
+    <NavigationProvider navigateRenderProps={(navigation) => (
+      <UserProvider>
       <QueryClientProvider>
         <LanguageProvider>
           <ThemeProvider>
             <FontProvider>
-              <View style={styles.space}>
-                <View style={styles.header}>
-                <Header />
-                </View>
-                <Main />
-              </View>
+              {navigation}
             </FontProvider>
           </ThemeProvider>
         </LanguageProvider>
       </QueryClientProvider>
     </UserProvider>
+    )}/>
   );
 }
 

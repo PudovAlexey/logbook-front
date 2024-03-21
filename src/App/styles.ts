@@ -4,11 +4,14 @@ const styles = StyleSheet.create({
     space: {
         display: 'flex',
         flexDirection: 'column',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
         width: '100%',
+        height: '100%',
     },
 
     header: {
-      flex: 0.05,  
+      flex: 30,  
     }
 })
 

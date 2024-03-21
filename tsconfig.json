@@ -37,6 +37,7 @@
     "./src/**/*.ts",
     "./src/**/*.tsx",
     "./**/*.tsx", "themed.d.ts",
+    "./**/*.ts", ".d.ts",
   ],
   "extends": "expo/tsconfig.base"
 }
