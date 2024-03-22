@@ -2,12 +2,12 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
     headerContainer: {
-      justifyContent: 'center',
-      alignItems: 'center',
       backgroundColor: '#397af8',
       marginBottom: 20,
       width: '100%',
       paddingVertical: 15,
+      paddingLeft: 15,
+      paddingRight: 15,
     },
     heading: {
       color: 'white',

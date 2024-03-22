@@ -1,6 +1,8 @@
 import { View, Text} from 'react-native';
 
-type AvailableScreensConfig = Record<string, any>
+type AvailableScreensConfig = Record<string, {
+    body: any
+}>
 
 function HomeScreen() {
     return (
@@ -19,8 +21,12 @@ function DetailsScreen() {
 }
 
 const availableScreensConfig: AvailableScreensConfig = {
-    home: HomeScreen,
-    detail: DetailsScreen,
+    home: {
+        body: HomeScreen,
+    },
+    detail: {
+        body: DetailsScreen
+    },
 
 }
 
