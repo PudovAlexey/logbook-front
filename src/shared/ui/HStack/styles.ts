@@ -8,9 +8,10 @@ type HStackProps = {
     gap?: 2 | 4 | 6 | 8 | 10 | 12 | 14 | 16 | 18 | 20 | 22 | 24 | 32 | 64
     width?: DimensionValue
     wrap?: boolean
+    height: DimensionValue
 }
 
-const styles = ({justifyContent, alignItems = 'center', direction = 'row', gap, width = '100%', wrap}: HStackProps) => StyleSheet.create({
+const styles = ({justifyContent, alignItems = 'center', direction = 'row', gap, width = '100%', wrap, height,}: HStackProps) => StyleSheet.create({
     style: {
      display: 'flex',
      justifyContent,
@@ -18,6 +19,7 @@ const styles = ({justifyContent, alignItems = 'center', direction = 'row', gap, 
      flexDirection: direction === 'row' ? 'row' : 'row-reverse',
      gap,
      width,
+     height,
      flexWrap: wrap ? 'wrap' : 'nowrap',
     }
 

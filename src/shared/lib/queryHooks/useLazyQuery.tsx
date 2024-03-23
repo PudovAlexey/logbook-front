@@ -8,7 +8,7 @@ type UseQueryProps<T extends unknown> = {
 
 function useLazyQuery() {
   return <T extends unknown>({endpoint, params}: UseQueryProps<T>) =>  
-  fetch(`https://jsonplaceholder.typicode.com/${endpoint.query(params)}`)
+  fetch(`${process.env.API_URL}/${endpoint.query(params)}`)
   .then((res) => res.json())
 }
 

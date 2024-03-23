@@ -15,7 +15,8 @@ function Main() {
         <View style={styles.container}>     
           <TabView value={index} onChange={setIndex} animationType="spring">
             <TabView.Item style={{ backgroundColor: 'red', width: '100%' }}>
-              <LogbookTab/>
+              <Text>Main</Text>
+              {/* <LogbookTab/> */}
             </TabView.Item>
             <TabView.Item style={{ backgroundColor: 'blue', width: '100%' }}>
               <Text h1>Favorite</Text>

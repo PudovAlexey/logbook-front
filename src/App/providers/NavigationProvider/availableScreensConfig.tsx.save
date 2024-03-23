@@ -1,4 +1,4 @@
-
+c
 import { LoginPage } from '@pages/LoginPage/ui/LoginPage';
 import { Main } from '@pages/Main';
 import { ProfilePage } from '@pages/ProfilePage/ProfilePage';
