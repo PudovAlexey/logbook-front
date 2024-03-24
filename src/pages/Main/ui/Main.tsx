@@ -7,19 +7,33 @@ import { useQuery } from '@shared/lib/queryHooks/useQuery';
 import { logbookEndpoints } from '@app/providers/QueryClientProvider/endpoints/logbook';
 import { useLazyQuery } from '@shared/lib/queryHooks/useLazyQuery';
 import { LogbookTab } from '@widgets/LogBookTab/ui/LogbookTab/LogbookTab';
+import { Alert } from '@shared/ui/Alert/ui/Alert';
+import { Button } from '@shared/ui/Button/ui/Button';
+import { useNotification } from '@shared/ui/AlertContext/ui/AlertContext';
 function Main() {
+  const notify = useNotification();
   //  const {t} = useTranslation();
     const [index, setIndex] = React.useState(0);
+
+    const handleNotificationTest = () => {
+      notify?.notify({
+        status: 'error',
+        time: 2000,
+        message: 'Error message',
+        description: 'error descr'
+      })
+    }
 
     return (
         <View style={styles.container}>     
           <TabView value={index} onChange={setIndex} animationType="spring">
-            <TabView.Item style={{ backgroundColor: 'red', width: '100%' }}>
-              <Text>Main</Text>
+            <TabView.Item style={{ backgroundColor: 'white', width: '100%' }}>
+              {/* <Text>Main</Text> */}
               {/* <LogbookTab/> */}
+              <Button onPress={handleNotificationTest}>ckick</Button>
             </TabView.Item>
             <TabView.Item style={{ backgroundColor: 'blue', width: '100%' }}>
-              <Text h1>Favorite</Text>
+              <Text h1>Favorite new</Text>
             </TabView.Item>
             <TabView.Item style={{ backgroundColor: 'green', width: '100%' }}>
               <Text h1>Cart</Text>

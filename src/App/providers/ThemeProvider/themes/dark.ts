@@ -2,16 +2,45 @@ import { Colors } from "@rneui/base"
 import { RecursivePartial } from "@rneui/themed/dist/config/theme"
 
 const dark: RecursivePartial<Colors> = {
+    // accepted
+
+    colorError: (a: number | undefined = 1) => `rgba(234, 41, 41, ${a})`,
+    colorErrorText: (a: number | undefined = 1) => `rgba(234, 41, 41, ${a})`,
+    colorErrorBorder: (a: number | undefined = 1) => `rgba(234, 41, 41, ${a})`,
+    colorErrorActive: (a: number | undefined = 1) => `rgba(196, 45, 45, ${a})`,
+    colorErrorTextActive: (a: number | undefined = 1) => `rgba(196, 45, 45, ${a})`,
+    colorErrorTextHover: (a: number | undefined = 1) => `rgba(248, 68, 68, ${a})`,
+    colorErrorHover: (a: number | undefined = 1) => `rgba(248, 68, 68, ${a})`,
+    colorErrorBorderHover: (a: number | undefined = 1) => `rgba(248, 68, 68, ${a})`,
+    colorWarning: (a: number | undefined = 1) => `rgba(242, 133, 0, ${a})`,
+    colorWarningText: (a: number | undefined = 1) => `rgba(242, 133, 0, ${a})`,
+    colorWarningBorder: (a: number | undefined = 1) => `rgba(242, 133, 0, ${a})`,
+    colorWarningTextActive: (a: number | undefined = 1) => `rgba(222, 122, 0, ${a})`,
+    colorWarningActive: (a: number | undefined = 1) => `rgba(222, 122, 0, ${a})`,
+    colorWarningBorderHover: (a: number | undefined = 1) => `rgba(255, 166, 56, ${a})`,
+    colorWarningHover: (a: number | undefined = 1) => `rgba(255, 166, 56, ${a})`,
+    colorWarningTextHover: (a: number | undefined = 1) => `rgba(255, 166, 56, ${a})`,
+    colorSuccess: (a: number | undefined = 1) => `rgba(45, 196, 98, ${a})`,
+    colorSuccessText: (a: number | undefined = 1) => `rgba(45, 196, 98, ${a})`,
+    colorSuccessBorder: (a: number | undefined = 1) => `rgba(45, 196, 98, ${a})`,
+    colorSuccessBgHover: (a: number | undefined = 1) => `rgba(181, 252, 206, ${a})`,
+    colorSuccessBorderHover: (a: number | undefined = 1) => `rgba(41, 234, 109, ${a})`,
+    colorSuccessHover: (a: number | undefined = 1) => `rgba(41, 234, 109, ${a})`,
+    colorSuccessTextHover: (a: number | undefined = 1) => `rgba(41, 234, 109, ${a})`,
+    colorSuccessTextActive: (a: number | undefined = 1) => `rgba(44, 158, 84, ${a})`,
+    colorSuccessActive: (a: number | undefined = 1) => `rgba(44, 158, 84, ${a})`,
+    //
+
     primary: "rgba(29,32,37,255)",
     secondary: "rgba(245,248,250,255)",
-    btnPrimary: 'rgba(24,58,60,255)',
+    btnPrimary: `rgba(24,58,60,255)`,
     black: "rgba(0,0,0,255)",
-    white: 'rgba(238,241,246,255)',
-    grey4: 'rgba(89,92,97,255)',
-    grey5: 'rgba(79,79,79,255)',
-    grey3: 'rgba(154,157,162,255)',
-    searchBg: 'rgba(0,0,0,255)',
-    divider: 'rgba(42,45,50,255)',
+    white: `rgba(238,241,246,255)`,
+    grey4: `rgba(89,92,97,255)`,
+    grey5: `rgba(79,79,79,255)`,
+    grey3: `rgba(154,157,162,255)`,
+    searchBg: `rgba(0,0,0,255)`,
+    divider: `rgba(42,45,50,255)`,
 }
 
 export {
