@@ -11,21 +11,21 @@ import { AlertContextProvider } from '@shared/ui/AlertContext/ui/AlertContext';
 
 function App() {
   return (
-    <NavigationProvider navigateRenderProps={(navigation) => (
-      <UserProvider>
-      <QueryClientProvider>
-        <LanguageProvider>
-          <ThemeProvider>
-            <FontProvider>
+    <NavigationProvider
+      navigateRenderProps={(navigation) => (
+        <QueryClientProvider>
+          <LanguageProvider>
+            <ThemeProvider>
+              <FontProvider>
                 <AlertContextProvider>
-                {navigation}
+                  <UserProvider>{navigation}</UserProvider>
                 </AlertContextProvider>
-            </FontProvider>
-          </ThemeProvider>
-        </LanguageProvider>
-      </QueryClientProvider>
-    </UserProvider>
-    )}/>
+              </FontProvider>
+            </ThemeProvider>
+          </LanguageProvider>
+        </QueryClientProvider>
+      )}
+    />
   );
 }
 

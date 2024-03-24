@@ -27,6 +27,10 @@ const light: RecursivePartial<Colors> = {
     colorSuccessTextHover: (a: number | undefined = 1) => `rgba(41, 234, 109, ${a})`,
     colorSuccessTextActive: (a: number | undefined = 1) => `rgba(44, 158, 84, ${a})`,
     colorSuccessActive: (a: number | undefined = 1) => `rgba(44, 158, 84, ${a})`,
+
+
+    colorBorder: (a: number | undefined = 1) => `rgba(229, 232, 235, ${a})`,
+    colorText: (a: number | undefined = 1) => `rgba(6, 7, 8, ${a})`,
 }
 
 export {

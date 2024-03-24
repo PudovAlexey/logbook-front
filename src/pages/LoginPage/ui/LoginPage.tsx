@@ -1,22 +1,23 @@
 import { Button } from '@shared/ui/Button/ui/Button';
 import { HStack } from '@shared/ui/HStack/HStack';
 import { Input } from '@shared/ui/Input/Input';
-import { Typography } from '@shared/ui/Typography';
 import { VStack } from '@shared/ui/VStack/VStack';
 import {styles} from './styles';
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { UseLazyMutation } from '@shared/lib/queryHooks/UseLazyMutation';
-import { loginEndpoints } from '@shared/api/loginEndpoints/loginEndpoints';
 import { useLoginHandlers } from '@app/providers/UserProvider/ui/UserProvider';
+import { useBackandStatuses } from '@shared/lib/apiHooks/useBackandErrors';
+import { useNotification } from '@shared/ui/AlertContext/ui/AlertContext';
 
 type LoginState = {
   login: string,
   password: string,
 }
 
-function LoginPage({ navigation }) {  
+function LoginPage({ navigation }) {
+  const notify = useNotification()
+  const {validationErrors, setValidate} = useBackandStatuses();
   const loginHandlers = useLoginHandlers();
+  const [] = useState();
 
   const [loginForm, setLoginForm] = useState<LoginState>({
     login: '',
@@ -28,11 +29,23 @@ function LoginPage({ navigation }) {
 
   }
 
-  const loginHandler = () => {
-    loginHandlers?.loginUserHandler({
+  const loginHandler = async () => {
+   const res = await loginHandlers?.loginUserHandler({
       login: loginForm.login,
       password: loginForm.password
     })
+
+    if (res.error) {
+      notify?.notify({
+        status: 'error',
+        message: JSON.stringify(res)
+      })
+    } else {
+      notify?.notify({
+        status: 'success',
+        message: JSON.stringify(res)
+      })
+    }
   }
 
   const forgotPasswordHandler = () => {
@@ -41,22 +54,24 @@ function LoginPage({ navigation }) {
 
   return (
     <HStack height={'100%'} width={'100%'} justifyContent="center" alignItems="center">
-      <VStack style={styles.formContainer} gap={10}>
-        <VStack alignItems="flex-start" gap={4}>
-          <Typography.Text style={styles.typographySpace}>Login</Typography.Text>
-          <Input onChangeText={(e) => setLoginForm((prev) => ({
+      <VStack style={styles.formContainer} gap={18}>
+      <Input
+        status={validationErrors?.['email']?.status}
+        validationText={validationErrors?.['email']?.message}
+        label="login"
+       onChangeText={(e) => setLoginForm((prev) => ({
             ...prev,
             login: e
           }))} value={loginForm.login}/>
-        </VStack>
 
-        <VStack alignItems="flex-start" gap={4}>
-        <Typography.Text style={styles.typographySpace}>password</Typography.Text>
-          <Input onChangeText={(e) => setLoginForm((prev) => ({
+        <Input
+        label="password"
+        status={validationErrors?.['password']?.status}
+        validationText={validationErrors?.['password']?.message}
+        onChangeText={(e) => setLoginForm((prev) => ({
             ...prev,
             password: e
           }))} value={loginForm.password}/>
-        </VStack>
         <VStack gap={4}>
           <Button onPress={loginHandler}>login</Button>
           <Button type="clear" onPress={createAccauntHandler}>create accaunt</Button>

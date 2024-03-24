@@ -3,6 +3,7 @@ import { User, userSlice } from '../model/UserSlice';
 import { observer } from "mobx-react-lite"
 import { UseLazyMutation } from '@shared/lib/queryHooks/UseLazyMutation';
 import { loginEndpoints } from '@shared/api/loginEndpoints/loginEndpoints';
+import { useNotification } from '@shared/ui/AlertContext/ui/AlertContext';
 
 type LoginUserHandlers = {
   loginUserHandler: (value: {login: string, password: string}) => void
@@ -13,16 +14,19 @@ const UserContext = createContext<User | null>(null);
 const loginHandlersContext = createContext<LoginUserHandlers | null>(null)
 
 const UserProvider = observer(({children}: PropsWithChildren) => {
+  const notification = useNotification();
   const mutation = UseLazyMutation();
     const user = userSlice.user
 
-    const loginUserHandler: LoginUserHandlers['loginUserHandler'] = ({login, password}) => {
-      mutation(loginEndpoints.login({
+    const loginUserHandler: LoginUserHandlers['loginUserHandler'] = async ({login, password}) => {
+      const res = await mutation(loginEndpoints.login({
         body: {
           email: login,
           password: password,
         }
       }))
+
+      return res
     }
 
     const logoutUserHandler: LoginUserHandlers['logoutUserHandler'] = () => {

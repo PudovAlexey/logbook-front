@@ -28,6 +28,9 @@ declare module '@rneui/themed' {
     colorSuccessHover: (a?: number) => string
     colorSuccessBorderHover: (a?: number) => string
     colorSuccessBgHover: (a?: number) => string
+    colorText: (a?: number) => string
+
+    colorBorder: (a?: number) => string
     //
     tertiary: string;
     accent: string;

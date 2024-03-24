@@ -1,18 +1,18 @@
-import cn from 'react-native-classnames';
+import {TextProps, useStyle} from './styles';
+import {Text as NativeText} from 'react-native';
 import React, { PropsWithChildren } from 'react'
-import {Text as RneuiText, TextProps} from '@rneui/themed';
-import { useStyle } from './styles';
-
-type TitleProps = TextProps & {
-level?: '1' | '2' | '3' | '4'
-}
 
 
-function Text({level = '3', children, style: parentStyle, ...props}: PropsWithChildren<TitleProps>) {
-    const style = useStyle();
-    // const measureStyle = {...style};
+function Text(props: PropsWithChildren<TextProps>) {
+  const {size = '3', children, style: parentStyle} = props
+    const style = useStyle(props);
 
-  return <RneuiText {...props} style={parentStyle}>{children}</RneuiText>
+  return <NativeText style={{
+    ...parentStyle,
+    ...style[size],
+    ...style.color,
+
+  }}>{children}</NativeText>
 }
 
 export {
