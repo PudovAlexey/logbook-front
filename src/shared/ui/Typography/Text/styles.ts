@@ -1,12 +1,14 @@
 import {StyleSheet} from 'react-native';
 import { makeStyles } from '@rneui/themed';
 import { BaseTypographyProps } from '../types';
+import useMakeTypographyToken from '@shared/lib/styleHooks/useMakeTypographyToken';
 
 type TextProps = BaseTypographyProps & {
   size?: '1' | '2' | '3' | '4'
   }
 
 const useStyle = (props: TextProps) => {
+  const styles = useMakeTypographyToken(props.color)
   return StyleSheet.create({
     1: {
       fontWeight: '400',
@@ -30,7 +32,7 @@ const useStyle = (props: TextProps) => {
     },
 
     color: {
-      color: 
+      color: styles,
     }
   })
 }

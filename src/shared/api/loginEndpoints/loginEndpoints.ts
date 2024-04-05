@@ -1,4 +1,5 @@
 import { MutationEndpoint } from "@shared/lib/queryHooks/UseLazyMutation"
+import { Endpoint } from "@shared/lib/queryHooks/types"
 
 const loginEndpoints = {
 
@@ -10,6 +11,12 @@ const loginEndpoints = {
     logout: (): MutationEndpoint => ({
         query: 'logout',
         method: 'POST'
+    }),
+
+    refreshTokens: ({uuid, refreshToken}: {uuid: string, refreshToken: string}): Endpoint<any> => ({
+        key: 'refresh',
+        query: () => `/refresh-tokens?refresh_token=${refreshToken}&id=${uuid}`,
+        // method: 'GET',
     })
 }
 

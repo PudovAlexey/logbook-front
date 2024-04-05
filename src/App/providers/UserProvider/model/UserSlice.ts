@@ -1,14 +1,16 @@
 import { makeAutoObservable } from "mobx"
 
 type User = {
-    userId: string
-    avatar: string
+    id: string
     email: string
     name: string
     surname: string
     patronymic: string
-    role: 'user' | 'admin'
-
+    role: string
+    created_at: string
+    updated_at: string
+    date_of_birth: string
+    access_token: string
 }
 
 class UserSlice {
@@ -16,6 +18,10 @@ class UserSlice {
 
     constructor() {
         makeAutoObservable(this)
+    }
+
+    setUser(user: User) {
+        this.user = user
     }
 }
 

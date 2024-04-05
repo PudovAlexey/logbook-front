@@ -1,3 +1,5 @@
+import { useGetUser } from "@app/providers/UserProvider/ui/UserProvider"
+
 type MutationEndpoint = {
     query: string
     body?: unknown
@@ -5,10 +7,12 @@ type MutationEndpoint = {
 }
 
 function UseLazyMutation() {
+    const user = useGetUser();
   return async (endpoint: MutationEndpoint) => {
-    const query = await fetch(`http://192.168.1.36:8080/${endpoint.query}`, {
+    const query = await fetch(`${process.env.API_URL}${endpoint.query}`, {
         headers: {
             "Content-Type": 'application/json',
+            access_token: user?.access_token || ''
         },
         body: JSON.stringify(endpoint.body),
         method: endpoint.method

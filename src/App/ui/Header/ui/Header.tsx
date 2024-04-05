@@ -10,8 +10,6 @@ import { useCallback } from 'react';
 function Header({navigation}: NativeStackHeaderProps) {
     const user = useGetUser();
 
-    console.log(navigation, 'nav')
-
     const navToLogin = useCallback(() => {
         if (user) {
             navigation.push('profile')
