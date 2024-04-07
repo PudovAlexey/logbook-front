@@ -8,7 +8,7 @@ type UseQueryProps<T extends unknown> = {
 }
 
 function useLazyQuery() {
-  const user = useGetUser();
+  const {user} = useGetUser();
   return <T extends unknown>({endpoint, params}: UseQueryProps<T>) =>  {
     return fetch(`${process.env.API_URL}/${endpoint.query(params)}`, {
       headers: {

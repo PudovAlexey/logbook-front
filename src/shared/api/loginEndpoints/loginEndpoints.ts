@@ -13,6 +13,11 @@ const loginEndpoints = {
         method: 'POST'
     }),
 
+    removeUser: ({id}: {id: string}): MutationEndpoint => ({
+        query: `remove_account/${id}`,
+        method: 'POST'
+    }),
+
     refreshTokens: ({uuid, refreshToken}: {uuid: string, refreshToken: string}): Endpoint<any> => ({
         key: 'refresh',
         query: () => `/refresh-tokens?refresh_token=${refreshToken}&id=${uuid}`,

@@ -1,4 +1,5 @@
 import { useGetUser } from "@app/providers/UserProvider/ui/UserProvider"
+import { useMemo } from "react"
 
 type MutationEndpoint = {
     query: string
@@ -6,13 +7,14 @@ type MutationEndpoint = {
     method: 'POST' | 'PUT' | 'PATCH'
 }
 
-function UseLazyMutation() {
-    const user = useGetUser();
+function useLazyMutation({accessToken}: {accessToken?: string}) {
+    const {user} = useGetUser();
+    const token = user?.access_token || accessToken || '';
   return async (endpoint: MutationEndpoint) => {
     const query = await fetch(`${process.env.API_URL}${endpoint.query}`, {
         headers: {
             "Content-Type": 'application/json',
-            access_token: user?.access_token || ''
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(endpoint.body),
         method: endpoint.method
@@ -31,7 +33,7 @@ function UseLazyMutation() {
 }
 
 export {
-    UseLazyMutation
+    useLazyMutation
 }
 
 export type {

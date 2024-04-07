@@ -1,8 +1,41 @@
-import {View, Text} from 'react-native';
+import { useGetUser, useLoginHandlers } from '@app/providers/UserProvider/ui/UserProvider';
+import { UserAvatarEditor } from '@features/UserAvatarEditor/ui/UserAvatarEditor';
+import { formatDate } from '@shared/lib/formatters/formatDate';
+import { UseLazyMutation } from '@shared/lib/queryHooks/UseLazyMutation';
+import { Button } from '@shared/ui/Button/ui/Button';
+import { Typography } from '@shared/ui/Typography';
+import { VStack } from '@shared/ui/VStack/VStack';
+import { useCallback } from 'react';
 
 function ProfilePage() {
+  const {user} = useGetUser();
+  const loginHandlers = useLoginHandlers();
+
+  const logoutHandler = useCallback(() => {
+    loginHandlers?.logoutUserHandler()
+  }, [user?.id]);
+
+  const removeAccauntHandler = useCallback(() => {
+    loginHandlers?.removeUserHandler()
+  }, []);
+
+  if (!user) {
+    return null;
+  }
+
+
   return (
-    <View><Text>Profile</Text></View>
+    <VStack gap={16} justifyContent="center" style={{
+      height: '100%'
+    }}>
+      <UserAvatarEditor/>
+      <Typography.Text>{user.email}</Typography.Text>
+      <Typography.Text>{formatDate({
+        date: user.date_of_birth
+      })}</Typography.Text>
+      <Button onPress={logoutHandler}>logout</Button>
+      <Button onPress={removeAccauntHandler}>remove accaunt</Button>
+    </VStack>
   )
 }
 

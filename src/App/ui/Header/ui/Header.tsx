@@ -8,7 +8,7 @@ import { useGetUser } from '@app/providers/UserProvider/ui/UserProvider';
 import { useCallback } from 'react';
 
 function Header({navigation}: NativeStackHeaderProps) {
-    const user = useGetUser();
+    const {user} = useGetUser();
 
     const navToLogin = useCallback(() => {
         if (user) {

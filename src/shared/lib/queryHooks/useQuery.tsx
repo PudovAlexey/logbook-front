@@ -8,7 +8,7 @@ type UseQueryProps<T extends unknown> = {
 }
 
  function useQuery<T extends unknown>({endpoint, params}: UseQueryProps<T>) {
-  const user = useGetUser();
+  const {user} = useGetUser();
   return TanstackQuery({
     queryKey: [endpoint.key],
     queryFn: () => fetch(`https://jsonplaceholder.typicode.com/${endpoint.query(params)}`, {
