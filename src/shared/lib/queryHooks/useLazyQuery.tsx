@@ -2,23 +2,47 @@ import React from 'react'
 import { Endpoint } from './types'
 import { useGetUser } from '@app/providers/UserProvider/ui/UserProvider'
 
-type UseQueryProps<T extends unknown> = {
-    endpoint: Endpoint<T>
-    params: T
+type UrlParams = {
+  url: string
 }
 
-function useLazyQuery() {
-  const {user} = useGetUser();
-  return <T extends unknown>({endpoint, params}: UseQueryProps<T>) =>  {
-    return fetch(`${process.env.API_URL}/${endpoint.query(params)}`, {
+type QueryEndpoint<P, R> = {
+  query: (params: P) => UrlParams
+};
+
+function useLazyQuery<P, R>(endpointMutation: QueryEndpoint<P, R>) {
+  const { user } = useGetUser();
+
+  
+  return async (params: P): Promise<{
+    data: R,
+    error: any
+  }> => {
+      const endpoint = endpointMutation.query(params);
+
+    const query = await fetch(`${process.env.API_URL}${endpoint.url}`, {
       headers: {
-        access_token: user?.access_token || ''
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${user?.access_token}`,
+      },
+      method: 'GET',
+    }).then(async (res) => {
+      if (!res.ok) {
+        return {
+          error: await res.json(),
+        };
+      } else {
+        return res.json();
       }
-    })
-    .then((res) => res.json())
-  }
+    });
+    return query;
+  };
 }
 
 export {
     useLazyQuery
+}
+
+export type {
+  QueryEndpoint
 }

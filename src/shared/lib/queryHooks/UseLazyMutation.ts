@@ -15,7 +15,10 @@ function useLazyMutation<P, R>(endpointMutation: MutationEndpoint<P, R>) {
   const { user } = useGetUser();
 
   
-  return async (params: P): Promise<R> => {
+  return async (params: P): Promise<{
+    data: R,
+    error: any
+  }> => {
       const endpoint = endpointMutation.query(params);
 
     const query = await fetch(`${process.env.API_URL}${endpoint.url}`, {

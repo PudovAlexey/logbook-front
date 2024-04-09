@@ -33,12 +33,6 @@ const UserProvider = observer(({ children }: PropsWithChildren) => {
 
   const refreshTokensHandler = useCallback(async ({id, refreshToken}: {id: string, refreshToken: string}) => {
     if (id && refreshToken) {
-      // const res = await getQuery(
-      //   loginEndpoints.refreshTokens({
-      //     uuid: id,
-      //     refreshToken: refreshToken,
-      //   })
-      // );
 
       const res = await fetch(`${process.env.API_URL}${`refresh-tokens?id=${id}&refresh_token=${refreshToken}`}`)
       .then((res) => res.json())
@@ -87,17 +81,6 @@ const UserProvider = observer(({ children }: PropsWithChildren) => {
       refreshTimer, 
       setRefreshTimer
     }), [user, refreshTimer, setRefreshTimer])}>
-      {/* <loginHandlersContext.Provider
-        value={useMemo(
-          () => ({
-            loginUserHandler,
-            logoutUserHandler,
-            removeUserHandler,
-          }),
-          []
-        )}
-      >
-    </loginHandlersContext.Provider> */}
     {children}
     </UserContext.Provider>
   );
@@ -112,17 +95,13 @@ const useLoginHandlers = () => {
   const {storage: userId, setStorage: setUserId} = useAsyncStorage('user-id', '');
 
   const {user, refreshTimer, setRefreshTimer} = useGetUser();
+
+  
+  const logoutMutation = useLazyMutation(loginEndpoints.logout);
   const loginMutation = useLazyMutation(loginEndpoints.login);
+  const removeUserMutation = useLazyMutation(loginEndpoints.removeUser);
 
   const loginUserHandler: LoginUserHandlers['loginUserHandler'] = async ({ login, password }) => {
-    // const res = await mutation(
-    //   loginEndpoints.login({
-    //     body: {
-    //       email: login,
-    //       password: password,
-    //     },
-    //   })
-    // );
     const res = await loginMutation({
       body: {
           email: login,
@@ -130,34 +109,29 @@ const useLoginHandlers = () => {
       }
     })
 
-    // if (res.error) {
-    //   return res;
-    // } else {
-    //   setRefreshToken(res.token.refresh_token);
-    //   setRefreshTimer(new Date(new Date(res.token.access_expired_in).getTime() - 5 * 60000).getTime())
-    //   userSlice.setUser({
-    //     ...res.data,
-    //     access_token: res.token.access_token,
-    //   });
-    //   setUserId(res.data.id)
-    //   return res;
-    // }
+    if (res.error) {
+      return res;
+    } else {
+      setRefreshToken(res.data.token.refresh_token);
+      setRefreshTimer(new Date(new Date(res.data.token.access_expired_in).getTime() - 5 * 60000).getTime())
+      userSlice.setUser({
+        ...res.data,
+        access_token: res.data.token.access_token,
+      });
+      setUserId(res.data.id)
+      return res;
+    }
   };
 
   const logoutUserHandler: LoginUserHandlers['logoutUserHandler'] = async () => {
     setRefreshToken('');
-    const res = await fetch(`${process.env.API_URL}logout`, {
-      headers: {
-        "Content-Type": 'application/json',
-        'Authorization': `Bearer ${user?.access_token}`
-      }
-    })
+
+    return await logoutMutation(null);
   };
 
   const removeUserHandler = () => {
     if (user) {
-      mutation(loginEndpoints.removeUser({id: user.id}));
-
+      removeUserMutation({id: user.id});
     }
   }
   return {
