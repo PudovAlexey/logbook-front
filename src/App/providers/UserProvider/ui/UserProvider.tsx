@@ -112,30 +112,36 @@ const useLoginHandlers = () => {
   const {storage: userId, setStorage: setUserId} = useAsyncStorage('user-id', '');
 
   const {user, refreshTimer, setRefreshTimer} = useGetUser();
-  const mutation = useLazyMutation({accessToken: user?.access_token});
+  const loginMutation = useLazyMutation(loginEndpoints.login);
 
   const loginUserHandler: LoginUserHandlers['loginUserHandler'] = async ({ login, password }) => {
-    const res = await mutation(
-      loginEndpoints.login({
-        body: {
+    // const res = await mutation(
+    //   loginEndpoints.login({
+    //     body: {
+    //       email: login,
+    //       password: password,
+    //     },
+    //   })
+    // );
+    const res = await loginMutation({
+      body: {
           email: login,
           password: password,
-        },
-      })
-    );
+      }
+    })
 
-    if (res.error) {
-      return res;
-    } else {
-      setRefreshToken(res.token.refresh_token);
-      setRefreshTimer(new Date(new Date(res.token.access_expired_in).getTime() - 5 * 60000).getTime())
-      userSlice.setUser({
-        ...res.data,
-        access_token: res.token.access_token,
-      });
-      setUserId(res.data.id)
-      return res;
-    }
+    // if (res.error) {
+    //   return res;
+    // } else {
+    //   setRefreshToken(res.token.refresh_token);
+    //   setRefreshTimer(new Date(new Date(res.token.access_expired_in).getTime() - 5 * 60000).getTime())
+    //   userSlice.setUser({
+    //     ...res.data,
+    //     access_token: res.token.access_token,
+    //   });
+    //   setUserId(res.data.id)
+    //   return res;
+    // }
   };
 
   const logoutUserHandler: LoginUserHandlers['logoutUserHandler'] = async () => {

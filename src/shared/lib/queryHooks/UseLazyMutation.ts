@@ -1,43 +1,43 @@
-import { useGetUser } from "@app/providers/UserProvider/ui/UserProvider"
-import { useMemo } from "react"
+import { useGetUser } from '@app/providers/UserProvider/ui/UserProvider';
+import { useMemo } from 'react';
 
-type MutationEndpoint = {
-    query: string
-    body?: unknown
-    method: 'POST' | 'PUT' | 'PATCH'
+type UrlParams = {
+    url: string
+    body?: unknown;
+    method: 'POST' | 'PUT' | 'PATCH';
 }
 
-function useLazyMutation({accessToken}: {accessToken?: string}) {
-    const {user} = useGetUser();
-    const token = user?.access_token || accessToken || '';
-  return async (endpoint: MutationEndpoint) => {
-    const query = await fetch(`${process.env.API_URL}${endpoint.query}`, {
-        headers: {
-            "Content-Type": 'application/json',
-            'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify(endpoint.body),
-        method: endpoint.method
-    })
-    .then(async (res) => {
-     if (!res.ok) {
-            return {
-                error: await res.json()
-            }
-        } else {
-            return res.json()
-     }
-    })
-    return query
-  }
+type MutationEndpoint<P, R> = {
+  query: (params: P) => UrlParams
+};
+
+function useLazyMutation<P, R>(endpointMutation: MutationEndpoint<P, R>) {
+  const { user } = useGetUser();
+
+  
+  return async (params: P): Promise<R> => {
+      const endpoint = endpointMutation.query(params);
+
+    const query = await fetch(`${process.env.API_URL}${endpoint.url}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${user?.access_token}`,
+      },
+      body: JSON.stringify(endpoint.body),
+      method: endpoint.method,
+    }).then(async (res) => {
+      if (!res.ok) {
+        return {
+          error: await res.json(),
+        };
+      } else {
+        return res.json();
+      }
+    });
+    return query;
+  };
 }
 
-export {
-    useLazyMutation
-}
+export { useLazyMutation };
 
-export type {
-    MutationEndpoint
-}
-
-
+export type { MutationEndpoint };
