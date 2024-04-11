@@ -1,6 +1,6 @@
 import { makeStyles } from '@rneui/themed';
 
-const useStyle = makeStyles((theme, props) => ({
+const useStyle = makeStyles(() => ({
     card: {
         width: '45%',
     },
@@ -18,9 +18,9 @@ const useStyle = makeStyles((theme, props) => ({
     },
     titleBlock: {
 
-    }
-}))
+    },
+}));
 
 export {
-    useStyle
-}
+    useStyle,
+};

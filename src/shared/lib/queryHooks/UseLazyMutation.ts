@@ -1,5 +1,5 @@
+/* eslint-disable no-unused-vars */
 import { useGetUser } from '@app/providers/UserProvider/ui/UserProvider';
-import { useMemo } from 'react';
 
 type UrlParams = {
     url: string
@@ -7,14 +7,13 @@ type UrlParams = {
     method: 'POST' | 'PUT' | 'PATCH';
 }
 
-type MutationEndpoint<P, R> = {
+type MutationEndpoint<P, _R> = {
   query: (params: P) => UrlParams
 };
 
 function useLazyMutation<P, R>(endpointMutation: MutationEndpoint<P, R>) {
   const { user } = useGetUser();
 
-  
   return async (params: P): Promise<{
     data: R,
     error: any
@@ -33,9 +32,8 @@ function useLazyMutation<P, R>(endpointMutation: MutationEndpoint<P, R>) {
         return {
           error: await res.json(),
         };
-      } else {
-        return res.json();
       }
+        return res.json();
     });
     return query;
   };

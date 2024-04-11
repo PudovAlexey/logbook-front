@@ -3,11 +3,11 @@ const tokens = {
         token: 'test',
         parameters: {
             count: 'count',
-            
+
         },
-    }
-}
+    },
+};
 
 export {
-    tokens
-}
+    tokens,
+};

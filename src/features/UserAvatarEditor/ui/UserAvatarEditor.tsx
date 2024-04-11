@@ -3,10 +3,9 @@ import { formatUserName } from '@shared/lib/formatters/formatUserName';
 import { Avatar } from '@shared/ui/Avatar/ui/Avatar';
 import { Typography } from '@shared/ui/Typography';
 import { VStack } from '@shared/ui/VStack/VStack';
-import {View} from 'react-native';
 
 function UserAvatarEditor() {
-    const {user} = useGetUser();
+    const { user } = useGetUser();
 
     if (!user) {
         return null;
@@ -23,17 +22,19 @@ function UserAvatarEditor() {
                 patronymic: user.patronymic,
                 type: 'char',
             })}
-            containerStyle={{ backgroundColor: "#9700b9" }}
+            containerStyle={{ backgroundColor: '#9700b9' }}
         />
-        <Typography.Text>{formatUserName({
+        <Typography.Text>
+{formatUserName({
             name: user.name,
             surname: user.surname,
             patronymic: user.patronymic,
-        })}</Typography.Text>
+        })}
+        </Typography.Text>
     </VStack>
-  )
+  );
 }
 
 export {
-    UserAvatarEditor
-}
+    UserAvatarEditor,
+};

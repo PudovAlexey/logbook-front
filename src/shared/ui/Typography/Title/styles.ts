@@ -1,14 +1,13 @@
-import {StyleSheet} from 'react-native';
-import { makeStyles } from '@rneui/themed';
-import { BaseTypographyProps } from '../types';
+import { StyleSheet } from 'react-native';
 import useMakeTypographyToken from '@shared/lib/styleHooks/useMakeTypographyToken';
+import { BaseTypographyProps } from '../types';
 
 type TitleProps = BaseTypographyProps & {
   size?: '1' | '2' | '3' | '4' | '5' | '6'
   }
 
 const useStyle = (props: TitleProps) => {
-  const styles = useMakeTypographyToken(props.color)
+  const styles = useMakeTypographyToken(props.color);
 
   return StyleSheet.create({
     h1: {
@@ -43,15 +42,15 @@ const useStyle = (props: TitleProps) => {
     },
 
     color: {
-      color: styles
-    }
-  })
-}
+      color: styles,
+    },
+  });
+};
 
 export {
-    useStyle
-}
+    useStyle,
+};
 
 export type {
-  TitleProps
-}
+  TitleProps,
+};

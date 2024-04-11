@@ -26,7 +26,7 @@ function transformStatusIntoColor(status: AlertProps['status'], colors: Colors) 
         border: `1px solid ${colors.colorErrorBorder()}`,
       };
     default:
-      return {}
+      return {};
   }
 }
 

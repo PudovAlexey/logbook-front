@@ -1,15 +1,9 @@
-import React from 'react'
+import React from 'react';
 import { Tab, Text, TabView } from '@rneui/themed';
 import { View, StyleSheet } from 'react-native';
-import { useTranslation } from 'react-i18next';
-import { tokens } from '@app/providers/LanguageProvider/tokens/tokens';
-import { useQuery } from '@shared/lib/queryHooks/useQuery';
-import { logbookEndpoints } from '@app/providers/QueryClientProvider/endpoints/logbook';
-import { useLazyQuery } from '@shared/lib/queryHooks/useLazyQuery';
-import { LogbookTab } from '@widgets/LogBookTab/ui/LogbookTab/LogbookTab';
-import { Alert } from '@shared/ui/Alert/ui/Alert';
 import { Button } from '@shared/ui/Button/ui/Button';
 import { useNotification } from '@shared/ui/AlertContext/ui/AlertContext';
+
 function Main() {
   const notify = useNotification();
   //  const {t} = useTranslation();
@@ -20,12 +14,22 @@ function Main() {
         status: 'error',
         time: 2000,
         message: 'Error message',
-        description: 'error descr'
-      })
-    }
+        description: 'error descr',
+      });
+    };
+
+    const styles = StyleSheet.create({
+      container: {
+        flex: 1,
+      //   backgroundColor: '#fff',
+      //   alignItems: 'center',
+      //   justifyContent: 'center',
+      //   width: 100,
+      },
+    });
 
     return (
-        <View style={styles.container}>     
+        <View style={styles.container}>
           <TabView value={index} onChange={setIndex} animationType="spring">
             <TabView.Item style={{ backgroundColor: 'white', width: '100%' }}>
               {/* <Text>Main</Text> */}
@@ -64,20 +68,10 @@ function Main() {
               icon={{ name: 'cart', type: 'ionicon', color: 'white' }}
             />
           </Tab>
-          </View>
+        </View>
       );
 }
 
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-    //   backgroundColor: '#fff',
-    //   alignItems: 'center',
-    //   justifyContent: 'center',
-    //   width: 100,
-    },
-  });
-
 export {
-    Main
-}
+    Main,
+};

@@ -17,6 +17,7 @@ function makeSize(size: DefaultSize) {
       return 94;
     case 'xs':
       return 94;
+    default: return 94;
   }
 }
 

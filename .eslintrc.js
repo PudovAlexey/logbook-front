@@ -38,7 +38,7 @@ module.exports = {
         'react/react-in-jsx-scope': 'off',
         'quote-props': 'off',
         'jsx-a11y/no-autofocus': 'off',
-        'react/jsx-props-no-spreading': 'warn',
+        'react/jsx-props-no-spreading': 'off',
         'react/function-component-definition': [
             'error',
             {

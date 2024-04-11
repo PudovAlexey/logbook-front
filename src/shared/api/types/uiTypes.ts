@@ -4,5 +4,5 @@ type BaseTypographyColor = 'warning' | 'success' | 'error' | string
 
 export type {
     BaseSize,
-    BaseTypographyColor
-}
+    BaseTypographyColor,
+};

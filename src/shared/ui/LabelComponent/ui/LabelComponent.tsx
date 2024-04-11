@@ -1,14 +1,15 @@
-import {View} from 'react-native'
-import { LabelComponentProps, useStyles } from './styles'
-import { PropsWithChildren } from 'react'
-import { Typography } from '@shared/ui/Typography'
+import { View } from 'react-native';
+import { PropsWithChildren } from 'react';
+import { Typography } from '@shared/ui/Typography';
 import { VStack } from '@shared/ui/VStack/VStack';
+import { LabelComponentProps, useStyles } from './styles';
 
 function LabelComponent(props: PropsWithChildren<LabelComponentProps>) {
-  const {label, required, children, validationText, status} = props;
+  const {
+ label, required, children, validationText, status,
+} = props;
 
-  console.log(validationText, 'test');
-  const styles = useStyles(props)
+  const styles = useStyles(props);
   return (
     <View style={styles.root}>
       <VStack alignItems="flex-start" gap={6}>
@@ -22,9 +23,9 @@ function LabelComponent(props: PropsWithChildren<LabelComponentProps>) {
       </VStack>
       {validationText && <Typography.Caption style={styles.caption} color={status}>{validationText}</Typography.Caption>}
     </View>
-  )
+  );
 }
 
 export {
-    LabelComponent
-}
+    LabelComponent,
+};

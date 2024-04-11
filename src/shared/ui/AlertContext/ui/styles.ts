@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     wrapper: {
@@ -10,9 +10,9 @@ const styles = StyleSheet.create({
         bottom: 70,
         left: 0,
         right: 0,
-    }
-})
+    },
+});
 
 export {
-    styles
-}
+    styles,
+};

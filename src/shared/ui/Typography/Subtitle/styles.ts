@@ -1,20 +1,20 @@
 import { StyleSheet } from 'react-native';
-import { BaseTypographyProps } from "../types"
 import useMakeTypographyToken from '@shared/lib/styleHooks/useMakeTypographyToken';
+import { BaseTypographyProps } from '../types';
 
 type SubtitleProps = BaseTypographyProps & {
     size: 'xl' | 'l'
 }
 
 const useStyles = (props: SubtitleProps) => {
-    const styles = useMakeTypographyToken(props.color)
+    const styles = useMakeTypographyToken(props.color);
     return StyleSheet.create({
         xl: {
             fontWeight: '600',
             fontSize: 16,
             lineHeight: 32,
           },
-          
+
           l: {
             fontWeight: '600',
             fontSize: 14,
@@ -22,16 +22,16 @@ const useStyles = (props: SubtitleProps) => {
           },
 
           color: {
-            color: styles
-          }
-          
-    })
-}
+            color: styles,
+          },
+
+    });
+};
 
 export {
-    useStyles
-}
+    useStyles,
+};
 
 export type {
-    SubtitleProps
-}
+    SubtitleProps,
+};

@@ -1,8 +1,6 @@
-
 import { LoginPage } from '@pages/LoginPage/ui/LoginPage';
 import { Main } from '@pages/Main';
 import { ProfilePage } from '@pages/ProfilePage/ProfilePage';
-import { View, Text } from 'react-native';
 
 type AvailableScreensConfig = {
   name: string;

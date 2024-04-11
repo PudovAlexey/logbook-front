@@ -1,8 +1,10 @@
-import { PropsWithChildren, createContext, useContext, useEffect, useMemo, useState } from 'react';
+import {
+ PropsWithChildren, createContext, useContext, useEffect, useMemo, useState,
+} from 'react';
 import { View } from 'react-native';
-import { styles } from './styles';
 import { VStack } from '@shared/ui/VStack/VStack';
 import { Alert } from '@shared/ui/Alert/ui/Alert';
+import { styles } from './styles';
 
 type NotificationProps = {
   status: 'error' | 'warning' | 'success';
@@ -12,6 +14,7 @@ type NotificationProps = {
 };
 
 type AlertContextValue = {
+  // eslint-disable-next-line no-unused-vars
   notify: (value: NotificationProps) => void;
 };
 
@@ -23,37 +26,37 @@ function AlertContextProvider({ children }: PropsWithChildren) {
   const notify: AlertContextValue['notify'] = (notify) => {
     const endTimer = notify.time || 2000;
     const id = Date.now();
-    setNotificationQueue((prev) => [{...notify, id, time: endTimer}, ...prev])
+    setNotificationQueue((prev) => [{ ...notify, id, time: endTimer }, ...prev]);
   };
-  
+
   useEffect(() => {
-    if (!notificationQueue.length) return
+    if (!notificationQueue.length) return;
     const interval = setInterval(() => {
-      setFireCheck(true)
+      setFireCheck(true);
     }, 150);
 
+    // eslint-disable-next-line consistent-return
     return () => {
-      clearInterval(interval)
-    }
-  }, [notificationQueue])
+      clearInterval(interval);
+    };
+  }, [notificationQueue]);
 
   useEffect(() => {
-    if (!notificationQueue.length) return
+    if (!notificationQueue.length) return;
     if (!fireCheck) return;
-    setFireCheck(false)
+    setFireCheck(false);
 
     notificationQueue.forEach((el) => {
       const timeStart = el.id;
-      const timeEnd = el.time || 0
-      const duration = timeStart + timeEnd
+      const timeEnd = el.time || 0;
+      const duration = timeStart + timeEnd;
       const currentTime = Date.now();
-      
-      if (currentTime >= duration) {
-        setNotificationQueue((prev) => prev.filter(({id}) => id !== timeStart))
-      }
-    })
-  }, [notificationQueue, fireCheck])
 
+      if (currentTime >= duration) {
+        setNotificationQueue((prev) => prev.filter(({ id }) => id !== timeStart));
+      }
+    });
+  }, [notificationQueue, fireCheck]);
 
   return (
     <AlertContext.Provider
@@ -61,15 +64,17 @@ function AlertContextProvider({ children }: PropsWithChildren) {
         () => ({
           notify,
         }),
-        []
+        [],
       )}
     >
       <>
         {children}
         <View style={styles.messageContainer}>
           <VStack gap={10}>
-            {notificationQueue.map(({status, message, description, id}) => (
-              <Alert key={id} status={status} message={message} description={description}/>
+            {notificationQueue.map(({
+ status, message, description, id,
+}) => (
+              <Alert key={id} status={status} message={message} description={description} />
             ))}
           </VStack>
         </View>

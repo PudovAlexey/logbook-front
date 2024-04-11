@@ -1,5 +1,5 @@
 import { BaseTypographyColor } from '@shared/api/types/uiTypes';
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 type LabelComponentProps = {
     label?: string
@@ -8,25 +8,25 @@ type LabelComponentProps = {
     status?: BaseTypographyColor
 }
 
-const useStyles = (props: LabelComponentProps) => {
+const useStyles = () => {
     return StyleSheet.create({
         root: {
-            position: 'relative'
+            position: 'relative',
         },
 
         caption: {
             position: 'absolute',
             left: 0,
             right: 0,
-            bottom: -20
+            bottom: -20,
         },
-    })
-}
+    });
+};
 
 export {
-    useStyles
-}
+    useStyles,
+};
 
 export type {
-    LabelComponentProps
-}
+    LabelComponentProps,
+};

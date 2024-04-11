@@ -1,14 +1,14 @@
 import { StyleSheet } from 'react-native';
-import { BaseTypographyProps } from '../types';
 import { BaseSize } from '@shared/api/types/uiTypes';
 import useMakeTypographyToken from '@shared/lib/styleHooks/useMakeTypographyToken';
+import { BaseTypographyProps } from '../types';
 
 type ButtonTypographyProps = BaseTypographyProps & {
     size: BaseSize
 }
 
-const useStyles = ({color}: ButtonTypographyProps) => {
-    const token = useMakeTypographyToken(color)
+const useStyles = ({ color }: ButtonTypographyProps) => {
+    const token = useMakeTypographyToken(color);
   return StyleSheet.create({
     xl: {
       fontWeight: '600',
@@ -39,17 +39,17 @@ const useStyles = ({color}: ButtonTypographyProps) => {
         fontSize: 12,
         lineHeight: 20,
       },
-    
+
     color: {
-        color: token
-    }
+        color: token,
+    },
   });
 };
 
 export {
-    useStyles
-}
+    useStyles,
+};
 
 export type {
-    ButtonTypographyProps
-}
+    ButtonTypographyProps,
+};

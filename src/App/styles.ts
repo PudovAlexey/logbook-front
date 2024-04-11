@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     space: {
@@ -11,10 +11,10 @@ const styles = StyleSheet.create({
     },
 
     header: {
-      flex: 30,  
-    }
-})
+      flex: 30,
+    },
+});
 
 export {
-    styles
-}
+    styles,
+};

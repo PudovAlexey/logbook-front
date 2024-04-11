@@ -1,60 +1,59 @@
-import React, { PropsWithChildren, createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { User, userSlice } from '../model/UserSlice';
+import React, {
+ PropsWithChildren, createContext, useCallback, useContext, useEffect, useMemo, useState,
+} from 'react';
 import { observer } from 'mobx-react-lite';
 import { useLazyMutation } from '@shared/lib/queryHooks/UseLazyMutation';
 import { loginEndpoints } from '@shared/api/loginEndpoints/loginEndpoints';
-import { useNotification } from '@shared/ui/AlertContext/ui/AlertContext';
 import { useAsyncStorage } from '@shared/lib/hooks/useAsyncStorage';
-import { useLazyQuery } from '@shared/lib/queryHooks/useLazyQuery';
+import { User, userSlice } from '../model/UserSlice';
 
 type LoginUserHandlers = {
-  loginUserHandler: (value: { login: string; password: string }) => void;
+  // eslint-disable-next-line no-unused-vars
+  loginUserHandler: (value: { login: string; password: string }) => any;
   logoutUserHandler: () => void;
   removeUserHandler: () => void;
 };
 
 const UserContext = createContext<{
-  user: User | null
-  refreshTimer: number
-  setRefreshTimer:  React.Dispatch<React.SetStateAction<number>>
+  user: User | null;
+  refreshTimer: number;
+  setRefreshTimer: React.Dispatch<React.SetStateAction<number>>;
 }>({
   user: null,
   refreshTimer: 0,
-  setRefreshTimer: () => {}
+  setRefreshTimer: () => {},
 });
 // const loginHandlersContext = createContext<LoginUserHandlers | null>(null);
 
 const UserProvider = observer(({ children }: PropsWithChildren) => {
-  const test = 12;
   const [refreshTimer, setRefreshTimer] = useState<number>(0);
-  const {storage: userId, setStorage: setUserId} = useAsyncStorage('user-id', '');
+  const { storage: userId, setStorage: setUserId } = useAsyncStorage('user-id', '');
   const { storage: refreshToken, setStorage: setRefreshToken } = useAsyncStorage('refresh-token', '');
-  const notification = useNotification();
-  const user = userSlice.user;
+  // const notification = useNotification();
+  const { user } = userSlice;
 
-  useEffect(() => {
-    console.log(user);
-  }, []);
+  const refreshTokensMutation = useLazyMutation(loginEndpoints.refreshTokens);
 
-  const refreshTokensHandler = useCallback(async ({id, refreshToken}: {id: string, refreshToken: string}) => {
+  const refreshTokensHandler = useCallback(async ({ id, refreshToken }: { id: string; refreshToken: string }) => {
     if (id && refreshToken) {
+      const res = await refreshTokensMutation({
+        refreshToken,
+        uuid: id,
+      });
 
-      const res = await fetch(`${process.env.API_URL}${`refresh-tokens?id=${id}&refresh_token=${refreshToken}`}`)
-      .then((res) => res.json())
-
-      if (res.error) {
-      } else {
+      if (res.data) {
         setRefreshToken(res.data.token.refresh_token);
-        setRefreshTimer(new Date(new Date(res.data.token.access_expired_in).getTime() - 5 * 60000).getTime())
+        setRefreshTimer(new Date(new Date(res.data.token.access_expired_in).getTime() - 5 * 60000).getTime());
         userSlice.setUser({
           ...res.data.data,
           access_token: res.data.token.access_token,
         });
-        setUserId(res.data.data.id)
+        setUserId(res.data.data.id);
         return res;
       }
     }
-  }, []);
+    return false;
+  }, [refreshTokensMutation, setRefreshToken, setUserId]);
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -62,31 +61,36 @@ const UserProvider = observer(({ children }: PropsWithChildren) => {
     if (refreshTimer > 0) {
       timer = setTimeout(() => {
         if (userId) {
-          refreshTokensHandler({id: userId, refreshToken})
+          refreshTokensHandler({ id: userId, refreshToken });
         }
-      }, refreshTimer)
+      }, refreshTimer);
     }
 
     return () => {
       if (timer) {
         clearTimeout(timer);
       }
-    }
-  }, [refreshTimer, userId]);
+    };
+  }, [refreshTimer, userId, refreshToken, refreshTokensHandler]);
 
   useEffect(() => {
-  if (userId) {
-    refreshTokensHandler({id: userId, refreshToken})
-  }
-  }, [userId]);
+    if (userId) {
+      refreshTokensHandler({ id: userId, refreshToken });
+    }
+  }, [userId, refreshToken, refreshTokensHandler]);
 
   return (
-    <UserContext.Provider value={useMemo(() => ({
-      user: user || null,
-      refreshTimer, 
-      setRefreshTimer
-    }), [user, refreshTimer, setRefreshTimer])}>
-    {children}
+    <UserContext.Provider
+      value={useMemo(
+        () => ({
+          user: user || null,
+          refreshTimer,
+          setRefreshTimer,
+        }),
+        [user, refreshTimer, setRefreshTimer],
+      )}
+    >
+      {children}
     </UserContext.Provider>
   );
 });
@@ -96,12 +100,11 @@ const useGetUser = () => {
 };
 
 const useLoginHandlers = () => {
-  const { storage: refreshToken, setStorage: setRefreshToken } = useAsyncStorage('refresh-token', '');
-  const {storage: userId, setStorage: setUserId} = useAsyncStorage('user-id', '');
+  const { setStorage: setRefreshToken } = useAsyncStorage('refresh-token', '');
+  const { setStorage: setUserId } = useAsyncStorage('user-id', '');
 
-  const {user, refreshTimer, setRefreshTimer} = useGetUser();
+  const { user, setRefreshTimer } = useGetUser();
 
-  
   const logoutMutation = useLazyMutation(loginEndpoints.logout);
   const loginMutation = useLazyMutation(loginEndpoints.login);
   const removeUserMutation = useLazyMutation(loginEndpoints.removeUser);
@@ -109,23 +112,22 @@ const useLoginHandlers = () => {
   const loginUserHandler: LoginUserHandlers['loginUserHandler'] = async ({ login, password }) => {
     const res = await loginMutation({
       body: {
-          email: login,
-          password: password,
-      }
-    })
+        email: login,
+        password,
+      },
+    });
 
     if (res.error) {
       return res;
-    } else {
+    }
       setRefreshToken(res.data.token.refresh_token);
-      setRefreshTimer(new Date(new Date(res.data.token.access_expired_in).getTime() - 5 * 60000).getTime())
+      setRefreshTimer(new Date(new Date(res.data.token.access_expired_in).getTime() - 5 * 60000).getTime());
       userSlice.setUser({
         ...res.data,
         access_token: res.data.token.access_token,
       });
-      setUserId(res.data.id)
+      setUserId(res.data.id);
       return res;
-    }
   };
 
   const logoutUserHandler: LoginUserHandlers['logoutUserHandler'] = async () => {
@@ -136,14 +138,14 @@ const useLoginHandlers = () => {
 
   const removeUserHandler = () => {
     if (user) {
-      removeUserMutation({id: user.id});
+      removeUserMutation({ id: user.id });
     }
-  }
+  };
   return {
     loginUserHandler,
     logoutUserHandler,
     removeUserHandler,
-  }
+  };
 };
 
 export { UserProvider, useGetUser, useLoginHandlers };

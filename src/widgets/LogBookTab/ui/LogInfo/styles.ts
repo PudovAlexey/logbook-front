@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     tabWrapper: {
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     },
 
     mainBox: {
-        position: 'relative'
+        position: 'relative',
     },
 
     circleBox: {
@@ -28,9 +28,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         right: -50,
-    }
-})
+    },
+});
 
 export {
-    styles
-}
+    styles,
+};

@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import {AnimatableNumericValue} from 'react-native';
 
 const styles = StyleSheet.create({
     cardView: {
@@ -24,18 +23,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderColor: 'blue',
       },
-
-    // card: {
-    //     display: 'flex',
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    //     borderRadius: 15,
-    //     height: 250,
-    //     width: '45%',
-    //     backgroundColor: 'green'
-    // }
-})
+});
 
 export {
-    styles
-}
+    styles,
+};

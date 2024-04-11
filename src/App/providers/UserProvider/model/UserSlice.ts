@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx"
+import { makeAutoObservable } from 'mobx';
 
 type User = {
     id: string
@@ -14,23 +14,23 @@ type User = {
 }
 
 class UserSlice {
-    user?: User 
+    user?: User;
 
     constructor() {
-        makeAutoObservable(this)
+        makeAutoObservable(this);
     }
 
     setUser(user: User) {
-        this.user = user
+        this.user = user;
     }
 }
 
 const userSlice = new UserSlice();
 
 export {
-    userSlice
-}
+    userSlice,
+};
 
 export type {
-    User
-}
+    User,
+};

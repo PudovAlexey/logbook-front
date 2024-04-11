@@ -1,5 +1,5 @@
-import { Colors } from "@rneui/base"
-import { RecursivePartial } from "@rneui/themed/dist/config/theme"
+import { Colors } from '@rneui/base';
+import { RecursivePartial } from '@rneui/themed/dist/config/theme';
 
 const light: RecursivePartial<Colors> = {
     colorError: (a: number | undefined = 1) => `rgba(234, 41, 41, ${a})`,
@@ -28,11 +28,10 @@ const light: RecursivePartial<Colors> = {
     colorSuccessTextActive: (a: number | undefined = 1) => `rgba(44, 158, 84, ${a})`,
     colorSuccessActive: (a: number | undefined = 1) => `rgba(44, 158, 84, ${a})`,
 
-
     colorBorder: (a: number | undefined = 1) => `rgba(229, 232, 235, ${a})`,
     colorText: (a: number | undefined = 1) => `rgba(6, 7, 8, ${a})`,
-}
+};
 
 export {
-    light
-}
+    light,
+};

@@ -1,8 +1,7 @@
-import { MutationEndpoint } from "@shared/lib/queryHooks/UseLazyMutation";
-import { QueryEndpoint } from "@shared/lib/queryHooks/useLazyQuery";
+import { QueryEndpoint } from '@shared/lib/queryHooks/useLazyQuery';
 
 function query<R, P>(endpoint: QueryEndpoint<P, R>) {
-  return endpoint
+  return endpoint;
 }
 
-export {query}
+export { query };

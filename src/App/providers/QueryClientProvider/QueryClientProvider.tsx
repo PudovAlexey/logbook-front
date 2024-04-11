@@ -1,8 +1,8 @@
-import { PropsWithChildren } from "react"
+import { PropsWithChildren } from 'react';
 import {
     QueryClient,
     QueryClientProvider as TanstackQueryClient,
-  } from '@tanstack/react-query'
+  } from '@tanstack/react-query';
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -10,17 +10,16 @@ const queryClient = new QueryClient({
         staleTime: Infinity,
       },
     },
-  })
+  });
 
- function QueryClientProvider({children}: PropsWithChildren) {
-
+ function QueryClientProvider({ children }: PropsWithChildren) {
   return (
     <TanstackQueryClient client={queryClient}>
         {children}
     </TanstackQueryClient>
-  )
+  );
 }
 
 export {
-    QueryClientProvider
-}
+    QueryClientProvider,
+};

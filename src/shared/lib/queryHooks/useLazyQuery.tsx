@@ -1,19 +1,18 @@
-import React from 'react'
-import { Endpoint } from './types'
-import { useGetUser } from '@app/providers/UserProvider/ui/UserProvider'
+import { useGetUser } from '@app/providers/UserProvider/ui/UserProvider';
 
 type UrlParams = {
   url: string
 }
 
-type QueryEndpoint<P, R> = {
+// eslint-disable-next-line no-unused-vars
+type QueryEndpoint<P, _R> = {
+  // eslint-disable-next-line no-unused-vars
   query: (params: P) => UrlParams
 };
 
 function useLazyQuery<P, R>(endpointMutation: QueryEndpoint<P, R>) {
   const { user } = useGetUser();
 
-  
   return async (params: P): Promise<{
     data: R,
     error: any
@@ -31,18 +30,17 @@ function useLazyQuery<P, R>(endpointMutation: QueryEndpoint<P, R>) {
         return {
           error: await res.json(),
         };
-      } else {
-        return res.json();
       }
+        return res.json();
     });
     return query;
   };
 }
 
 export {
-    useLazyQuery
-}
+    useLazyQuery,
+};
 
 export type {
-  QueryEndpoint
-}
+  QueryEndpoint,
+};
