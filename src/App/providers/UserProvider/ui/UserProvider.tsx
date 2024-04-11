@@ -25,11 +25,16 @@ const UserContext = createContext<{
 // const loginHandlersContext = createContext<LoginUserHandlers | null>(null);
 
 const UserProvider = observer(({ children }: PropsWithChildren) => {
+  const test = 12;
   const [refreshTimer, setRefreshTimer] = useState<number>(0);
   const {storage: userId, setStorage: setUserId} = useAsyncStorage('user-id', '');
   const { storage: refreshToken, setStorage: setRefreshToken } = useAsyncStorage('refresh-token', '');
   const notification = useNotification();
   const user = userSlice.user;
+
+  useEffect(() => {
+    console.log(user);
+  }, []);
 
   const refreshTokensHandler = useCallback(async ({id, refreshToken}: {id: string, refreshToken: string}) => {
     if (id && refreshToken) {

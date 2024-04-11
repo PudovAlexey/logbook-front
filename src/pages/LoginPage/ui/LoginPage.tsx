@@ -3,7 +3,7 @@ import { HStack } from '@shared/ui/HStack/HStack';
 import { Input } from '@shared/ui/Input/Input';
 import { VStack } from '@shared/ui/VStack/VStack';
 import {styles} from './styles';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLoginHandlers } from '@app/providers/UserProvider/ui/UserProvider';
 import { useBackandStatuses } from '@shared/lib/apiHooks/useBackandErrors';
 import { useNotification } from '@shared/ui/AlertContext/ui/AlertContext';
@@ -18,6 +18,10 @@ function LoginPage({ navigation }) {
   const {validationErrors, setValidate} = useBackandStatuses();
   const loginHandlers = useLoginHandlers();
   const [] = useState();
+
+  useEffect(() => {
+    console.log(loginHandlers)
+  }, []);
 
   const [loginForm, setLoginForm] = useState<LoginState>({
     login: '',
