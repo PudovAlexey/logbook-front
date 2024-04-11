@@ -1,5 +1,5 @@
 import { BaseTypographyColor } from '@shared/api/types/uiTypes';
-import useMakeTypographyToken from '@shared/lib/styleHooks/useMakeTypographyToken';
+import { useMakeTypographyToken } from '@shared/lib/styleHooks/useMakeTypographyToken';
 import { StyleProp, StyleSheet } from 'react-native';
 
 type CaptionProps = {

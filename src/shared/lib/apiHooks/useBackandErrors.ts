@@ -2,7 +2,6 @@ import { BaseTypographyColor } from '@shared/api/types/uiTypes';
 import { useState } from 'react';
 
 type BackandErrors = Record<string, {
-    status: BaseTypographyColor
     message: string
     description?: string
 }>
@@ -10,7 +9,7 @@ type BackandErrors = Record<string, {
 function useBackandStatuses() {
   const [validationErrors, setValidationStatuses] = useState<BackandErrors>({});
   return {
-    setValidate: (value: BackandErrors) => {
+    setValidationErrors: (value: BackandErrors) => {
       setValidationStatuses(value);
     },
     validationErrors,

@@ -15,7 +15,7 @@ type LoginState = {
 
 function LoginPage() {
   const notify = useNotification();
-  const { validationErrors } = useBackandStatuses();
+  const { validationErrors, setValidationErrors } = useBackandStatuses();
   const loginHandlers = useLoginHandlers();
 
   const [loginForm, setLoginForm] = useState<LoginState>({
@@ -34,10 +34,11 @@ function LoginPage() {
     });
 
     if (res.error) {
-      notify?.notify({
-        status: 'error',
-        message: JSON.stringify(res),
-      });
+      setValidationErrors(res.error.detail);
+      // notify?.notify({
+      //   status: 'error',
+      //   message: JSON.stringify(res),
+      // });
     } else {
       notify?.notify({
         status: 'success',
@@ -54,7 +55,7 @@ function LoginPage() {
     <HStack height="100%" width="100%" justifyContent="center" alignItems="center">
       <VStack style={styles.formContainer} gap={18}>
       <Input
-        status={validationErrors?.email?.status}
+        status="error"
         validationText={validationErrors?.email?.message}
         label="login"
        onChangeText={(e) => setLoginForm((prev) => ({
@@ -66,7 +67,7 @@ value={loginForm.login}
 
         <Input
         label="password"
-        status={validationErrors?.password?.status}
+        status="error"
         validationText={validationErrors?.password?.message}
         onChangeText={(e) => setLoginForm((prev) => ({
             ...prev,

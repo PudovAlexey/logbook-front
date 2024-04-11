@@ -26,12 +26,7 @@ function useLazyQuery<P, R>(endpointMutation: QueryEndpoint<P, R>) {
       },
       method: 'GET',
     }).then(async (res) => {
-      if (!res.ok) {
-        return {
-          error: await res.json(),
-        };
-      }
-        return res.json();
+      return res.json();
     });
     return query;
   };

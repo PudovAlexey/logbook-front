@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import useMakeTypographyToken from '@shared/lib/styleHooks/useMakeTypographyToken';
+import { useMakeTypographyToken } from '@shared/lib/styleHooks/useMakeTypographyToken';
 import { BaseTypographyProps } from '../types';
 
 type TextProps = BaseTypographyProps & {

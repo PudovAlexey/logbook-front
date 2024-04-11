@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { BaseSize } from '@shared/api/types/uiTypes';
-import useMakeTypographyToken from '@shared/lib/styleHooks/useMakeTypographyToken';
+import { useMakeTypographyToken } from '@shared/lib/styleHooks/useMakeTypographyToken';
 import { BaseTypographyProps } from '../types';
 
 type ButtonTypographyProps = BaseTypographyProps & {
