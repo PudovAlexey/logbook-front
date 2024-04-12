@@ -35,11 +35,13 @@ const UserProvider = observer(({ children }: PropsWithChildren) => {
   const refreshTokensMutation = useLazyMutation(loginEndpoints.refreshTokens);
 
   const refreshTokensHandler = useCallback(async ({ id, refreshToken }: { id: string; refreshToken: string }) => {
+    console.log(id, refreshToken);
     if (id && refreshToken) {
       const res = await refreshTokensMutation({
         refreshToken,
         uuid: id,
       });
+
 
       if (res.data) {
         setRefreshToken(res.data.token.refresh_token);
@@ -120,14 +122,13 @@ const useLoginHandlers = () => {
     if (res.error) {
       return res;
     }
-    console.log('tokens set')
       setRefreshToken(res.data.token.refresh_token);
       setRefreshTimer(new Date(new Date(res.data.token.access_expired_in).getTime() - 5 * 60000).getTime());
       userSlice.setUser({
-        ...res.data,
+        ...res.data.data,
         access_token: res.data.token.access_token,
       });
-      setUserId(res.data.id);
+      setUserId(res.data.data.id);
       return res;
   }, [loginMutation, setRefreshTimer, setRefreshToken, setUserId]);
 
