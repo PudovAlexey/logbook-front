@@ -13,7 +13,7 @@ type LoginState = {
   password: string,
 }
 
-function LoginPage() {
+function LoginPage({ navigation }) {
   const notify = useNotification();
   const { validationErrors, setValidationErrors } = useBackandStatuses();
   const loginHandlers = useLoginHandlers();
@@ -33,6 +33,9 @@ function LoginPage() {
       password: loginForm.password,
     });
 
+    // console.log(navigation);
+    console.log('trigger');
+    
     if (res.error) {
       setValidationErrors(res.error.detail);
       // notify?.notify({
@@ -40,6 +43,8 @@ function LoginPage() {
       //   message: JSON.stringify(res),
       // });
     } else {
+      navigation.replace('main');
+
       notify?.notify({
         status: 'success',
         message: JSON.stringify(res),

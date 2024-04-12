@@ -8,7 +8,8 @@ import { NavigationProvider } from './providers/NavigationProvider/NavigationPro
 
 function App() {
   return (
-    <NavigationProvider
+  <UserProvider>
+      <NavigationProvider
       // eslint-disable-next-line react/no-unstable-nested-components
       navigateRenderProps={(navigation) => (
         <QueryClientProvider>
@@ -16,7 +17,7 @@ function App() {
             <ThemeProvider>
               <FontProvider>
                 <AlertContextProvider>
-                  <UserProvider>{navigation}</UserProvider>
+                {navigation}
                 </AlertContextProvider>
               </FontProvider>
             </ThemeProvider>
@@ -24,6 +25,7 @@ function App() {
         </QueryClientProvider>
       )}
     />
+  </UserProvider>
   );
 }
 

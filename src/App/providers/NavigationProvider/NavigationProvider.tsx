@@ -6,6 +6,7 @@ import {
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Header } from '@app/ui/Header/ui/Header';
 import { AvailableScreensConfig, availableScreensConfig } from './availableScreensConfig';
+import { useGetUser } from '../UserProvider/ui/UserProvider';
 
 type FireCallback = (value: AvailableScreensConfig) => keyof AvailableScreensConfig;
 
@@ -23,12 +24,13 @@ type NavigationProviderProps = {
 const Stack = createNativeStackNavigator();
 
 function NavigationProvider({ navigateRenderProps }: NavigationProviderProps) {
+  const user = useGetUser();
   return (
     <>
       {navigateRenderProps(
         <NavigationContainer>
           <Stack.Navigator>
-          {availableScreensConfig.map(({ name, component }) => (
+          {availableScreensConfig(user.user).map(({ name, component }) => (
             <Stack.Screen
 options={{
               // eslint-disable-next-line react/no-unstable-nested-components

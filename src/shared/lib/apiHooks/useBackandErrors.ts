@@ -1,4 +1,3 @@
-import { BaseTypographyColor } from '@shared/api/types/uiTypes';
 import { useState } from 'react';
 
 type BackandErrors = Record<string, {

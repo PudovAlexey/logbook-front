@@ -109,7 +109,7 @@ const useLoginHandlers = () => {
   const loginMutation = useLazyMutation(loginEndpoints.login);
   const removeUserMutation = useLazyMutation(loginEndpoints.removeUser);
 
-  const loginUserHandler: LoginUserHandlers['loginUserHandler'] = async ({ login, password }) => {
+  const loginUserHandler: LoginUserHandlers['loginUserHandler'] = useCallback(async ({ login, password }) => {
     const res = await loginMutation({
       body: {
         email: login,
@@ -120,6 +120,7 @@ const useLoginHandlers = () => {
     if (res.error) {
       return res;
     }
+    console.log('tokens set')
       setRefreshToken(res.data.token.refresh_token);
       setRefreshTimer(new Date(new Date(res.data.token.access_expired_in).getTime() - 5 * 60000).getTime());
       userSlice.setUser({
@@ -128,7 +129,7 @@ const useLoginHandlers = () => {
       });
       setUserId(res.data.id);
       return res;
-  };
+  }, [loginMutation, setRefreshTimer, setRefreshToken, setUserId]);
 
   const logoutUserHandler: LoginUserHandlers['logoutUserHandler'] = async () => {
     setRefreshToken('');
