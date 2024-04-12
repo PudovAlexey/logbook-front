@@ -34,8 +34,7 @@ function LoginPage({ navigation }) {
     });
 
     // console.log(navigation);
-    console.log('trigger');
-    
+
     if (res.error) {
       setValidationErrors(res.error.detail);
       // notify?.notify({
@@ -71,6 +70,7 @@ value={loginForm.login}
       />
 
         <Input
+        secureTextEntry
         label="password"
         status="error"
         validationText={validationErrors?.password?.message}
