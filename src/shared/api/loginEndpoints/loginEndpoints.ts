@@ -1,7 +1,8 @@
 import { builder } from '../apiHandlers';
+import { LoginParams, RefreshTokensParams, RemoveUserParams, RequestVerificationCodeParams, SubmitChangePasswordParams } from './types';
 
 const loginEndpoints = {
-    login: builder.mutation<any, {body: {email: string, password: string}}>({
+    login: builder.mutation<any, LoginParams>({
         query: ({ body }) => ({
             url: 'login',
             method: 'POST',
@@ -16,17 +17,32 @@ const loginEndpoints = {
         }),
     }),
 
-    removeUser: builder.mutation<any, {id: string}>({
+    removeUser: builder.mutation<any, RemoveUserParams>({
         query: ({ id }) => ({
             url: `remove_account/${id}`,
             method: 'POST',
         }),
     }),
 
-    refreshTokens: builder.mutation<any, {refreshToken: string, uuid: string}>({
+    refreshTokens: builder.mutation<any, RefreshTokensParams>({
         query: ({ refreshToken, uuid }) => ({
             url: `/refresh-tokens?refresh_token=${refreshToken}&id=${uuid}`,
             method: 'POST',
+        }),
+    }),
+
+    requestVerificationCode: builder.mutation<string, RequestVerificationCodeParams>({
+        query: ({ email }) => ({
+            url: `/verification_code/${email}`,
+            method: 'POST',
+        }),
+    }),
+
+    submitChangePassword: builder.mutation<string, SubmitChangePasswordParams>({
+        query: ({ email, body }) => ({
+            url: `resetPassword${email}`,
+            method: 'POST',
+            body,
         }),
     }),
 };

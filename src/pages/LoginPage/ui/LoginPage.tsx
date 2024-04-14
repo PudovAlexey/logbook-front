@@ -37,10 +37,6 @@ function LoginPage({ navigation }) {
 
     if (res.error) {
       setValidationErrors(res.error.detail);
-      // notify?.notify({
-      //   status: 'error',
-      //   message: JSON.stringify(res),
-      // });
     } else {
       navigation.replace('main');
 
@@ -52,7 +48,7 @@ function LoginPage({ navigation }) {
   };
 
   const forgotPasswordHandler = () => {
-
+    navigation.push('forgotPassword');
   };
 
   return (

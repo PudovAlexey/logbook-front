@@ -12,6 +12,8 @@ export type InputProps = TextInputProps & {
   label?: string;
   status?: BaseTypographyColor
   validationText?: string
+  addonAfter?: React.ReactNode
+  addonBefore?: React.ReactNode
 };
 
 // function sizeIntoLevel(size: InputProps['size']) {
@@ -27,7 +29,7 @@ export type InputProps = TextInputProps & {
 
 function Input(props: InputProps) {
   const {
- style: inStyle, label, wrapperStyle, status, size = 'm', validationText, ...otherProps
+ style: inStyle, label, wrapperStyle, status, size = 'm', addonBefore, addonAfter, validationText, ...otherProps
 } = props;
   const styles = useStyles();
 
@@ -40,10 +42,12 @@ function Input(props: InputProps) {
           ...wrapperStyle,
         }}
         >
+          {addonBefore}
           <TextInput
             style={styles[size]}
             {...otherProps}
           />
+          {addonAfter}
         </View>
    </LabelComponent>
   );
