@@ -31,16 +31,18 @@ const loginEndpoints = {
         }),
     }),
 
-    requestVerificationCode: builder.mutation<string, RequestVerificationCodeParams>({
+    requestVerificationCode: builder.mutation<{
+        timer: number
+    }, RequestVerificationCodeParams>({
         query: ({ email }) => ({
-            url: `/verification_code/${email}`,
+            url: `verification_code/${email}`,
             method: 'POST',
         }),
     }),
 
     submitChangePassword: builder.mutation<string, SubmitChangePasswordParams>({
         query: ({ email, body }) => ({
-            url: `resetPassword${email}`,
+            url: `reset_password/${email}`,
             method: 'POST',
             body,
         }),

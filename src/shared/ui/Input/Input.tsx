@@ -47,7 +47,12 @@ function Input(props: InputProps) {
             style={styles[size]}
             {...otherProps}
           />
+          <View style={{
+            ...styles.addon,
+          }}
+          >
           {addonAfter}
+          </View>
         </View>
    </LabelComponent>
   );

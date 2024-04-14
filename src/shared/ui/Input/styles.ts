@@ -77,6 +77,12 @@ const useStyles = () => {
             borderWidth: 1,
             borderStyle: 'solid',
             borderColor: theme.colors.colorBorder(),
+            display: 'flex',
+            flexDirection: 'row',
+        },
+
+        'addon': {
+          maxWidth: 50,
         },
       });
 };
