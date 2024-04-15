@@ -10,10 +10,10 @@ export type InputProps = TextInputProps & {
   inputStyle?: StyleProp<any>;
   wrapperStyle?: StyleProp<any>;
   label?: string;
-  status?: BaseTypographyColor
-  validationText?: string
-  addonAfter?: React.ReactNode
-  addonBefore?: React.ReactNode
+  status?: BaseTypographyColor;
+  validationText?: string;
+  addonAfter?: React.ReactNode;
+  addonBefore?: React.ReactNode;
 };
 
 // function sizeIntoLevel(size: InputProps['size']) {
@@ -29,32 +29,62 @@ export type InputProps = TextInputProps & {
 
 function Input(props: InputProps) {
   const {
- style: inStyle, label, wrapperStyle, status, size = 'm', addonBefore, addonAfter, validationText, ...otherProps
-} = props;
+    style: inStyle,
+    label,
+    wrapperStyle,
+    status,
+    size = 'm',
+    addonBefore,
+    addonAfter,
+    validationText,
+    ...otherProps
+  } = props;
   const styles = useStyles();
 
   return (
-   <LabelComponent status={status} validationText={validationText} label={label}>
-        <View style={{
+    <LabelComponent
+      status={status}
+      validationText={validationText}
+      label={label}
+    >
+      <View
+        style={{
           ...styles.wrapper,
           ...styles[`wrapper${size}`],
           // ...(status ? styles[`wrapper_${status}`] : {}),
           ...wrapperStyle,
         }}
-        >
-          {addonBefore}
-          <TextInput
-            style={styles[size]}
-            {...otherProps}
-          />
-          <View style={{
-            ...styles.addon,
-          }}
+      >
+        {addonBefore && (
+          <View
+            style={{
+              ...styles.addon,
+              ...styles['addon-left'],
+            }}
           >
-          {addonAfter}
+            {addonBefore}
           </View>
-        </View>
-   </LabelComponent>
+        )}
+        <TextInput
+          style={{
+            ...styles.input,
+            ...styles[size],
+          }}
+
+          {...otherProps}
+        />
+        {addonAfter && (
+          <View
+            style={{
+              ...styles.addon,
+              ...styles['addon-right'],
+            }}
+          >
+            {addonAfter}
+          </View>
+        )}
+      </View>
+    </LabelComponent>
   );
 }
 

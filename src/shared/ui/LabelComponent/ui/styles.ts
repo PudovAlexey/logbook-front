@@ -12,6 +12,7 @@ const useStyles = () => {
     return StyleSheet.create({
         root: {
             position: 'relative',
+            width: '100%',
         },
 
         caption: {

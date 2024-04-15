@@ -6,6 +6,20 @@ const useStyles = () => {
 
     return StyleSheet.create({
 
+      'wrapper': {
+        width: '100%',
+       overflow: 'hidden',
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: theme.colors.colorBorder(),
+        display: 'flex',
+        flexDirection: 'row',
+    },
+
+    'input': {
+      width: '100%',
+    },
+
         xs: {
           paddingTop: 1,
           paddingBottom: 1,
@@ -15,6 +29,7 @@ const useStyles = () => {
 
         wrapperxs: {
             borderRadius: 4,
+            maxHeight: 24,
         },
 
         s: {
@@ -26,6 +41,7 @@ const useStyles = () => {
 
         wrappers: {
             borderRadius: 4,
+            maxHeight: 32,
         },
 
         m: {
@@ -37,6 +53,7 @@ const useStyles = () => {
 
         wrapperm: {
             borderRadius: 8,
+            maxHeight: 40,
         },
 
         l: {
@@ -48,6 +65,7 @@ const useStyles = () => {
 
         wrapperl: {
             borderRadius: 8,
+            maxHeight: 48,
         },
 
         xl: {
@@ -59,6 +77,7 @@ const useStyles = () => {
 
         wrapperxl: {
             borderRadius: 8,
+            maxHeight: 56,
         },
 
         'wrapper_error': {
@@ -73,16 +92,20 @@ const useStyles = () => {
             borderColor: theme.colors.colorSuccessBorder(),
         },
 
-        'wrapper': {
-            borderWidth: 1,
-            borderStyle: 'solid',
-            borderColor: theme.colors.colorBorder(),
-            display: 'flex',
-            flexDirection: 'row',
-        },
-
         'addon': {
           maxWidth: 50,
+        },
+
+        'addon-right': {
+          borderLeftWidth: 1,
+          borderStyle: 'solid',
+          borderLeftColor: theme.colors.colorBorder(),
+        },
+
+        'addon-left': {
+          borderRightWidth: 1,
+          borderStyle: 'solid',
+          borderRightColor: theme.colors.colorBorder(),
         },
       });
 };

@@ -4,9 +4,9 @@ import { VStack } from '@shared/ui/VStack/VStack';
 import { useEffect, useState } from 'react';
 import { Button } from '@shared/ui/Button/ui/Button';
 import { useNotification } from '@shared/ui/AlertContext/ui/AlertContext';
-import { useLazyQuery } from '@shared/lib/queryHooks/useLazyQuery';
 import { loginEndpoints } from '@shared/api/loginEndpoints/loginEndpoints';
 import { useLazyMutation } from '@shared/lib/queryHooks/UseLazyMutation';
+import { PageWrapper } from '@shared/ui/PageWrapper/ui/PageWrapper';
 
 type FormData = {
   email: string;
@@ -49,11 +49,6 @@ function ForgotPasswordPage({ navigation }) {
 
     if (verificationCode.data) {
       setExpireSend(verificationCode.data.timer);
-      // notify?.notify({
-      //   status: 'success',
-      //   message: 'verification code was sended',
-      //   description: 'please check your email address',
-      // });
     } else {
       notify?.notify({
         status: 'error',
@@ -80,13 +75,14 @@ function ForgotPasswordPage({ navigation }) {
   };
 
   return (
-    <HStack
+    <PageWrapper>
+      <HStack
       height="100%"
       width="100%"
       justifyContent="center"
       alignItems="center"
-    >
-      <VStack gap={4}>
+      >
+      <VStack height="auto" width="100%" gap={4}>
         <Input
           value={loginForm.email}
           onChangeText={(e) => onChangeValue({ value: e, token: 'email' })}
@@ -97,12 +93,13 @@ function ForgotPasswordPage({ navigation }) {
           label="secret code"
           onChangeText={(e) => onChangeValue({ value: +e, token: 'secretCode' })}
           addonAfter={(
-<Button
+          <Button
+          shape="square"
           disabled={expireSend > 0}
             onPress={requestVerificationCode}
->
-{expireSend > 0 ? expireSend : 'send email code'}
-</Button>
+          >
+{expireSend > 0 ? expireSend : 'send'}
+          </Button>
 )}
         />
         <Input
@@ -119,7 +116,8 @@ function ForgotPasswordPage({ navigation }) {
         />
         <Button onPress={submitResetPasswordHandler}>submit</Button>
       </VStack>
-    </HStack>
+      </HStack>
+    </PageWrapper>
   );
 }
 

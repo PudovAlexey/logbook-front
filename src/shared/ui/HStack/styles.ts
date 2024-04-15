@@ -12,7 +12,7 @@ type HStackProps = {
 }
 
 const styles = ({
- justifyContent, alignItems = 'center', direction = 'row', gap, width = '100%', wrap, height = 'auto',
+ justifyContent, alignItems = 'center', direction = 'row', gap, width = '100%', wrap, height = '100%',
 }: HStackProps) => StyleSheet.create({
     style: {
      display: 'flex',
