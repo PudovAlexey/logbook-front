@@ -39,6 +39,13 @@ type RegisterUserParams = {
     }
 }
 
+type RegisterVerifyParams = {
+    id: string,
+    body: {
+        verifyCode: number
+    }
+}
+
 export type {
     SubmitChangePasswordParams,
     RefreshTokensParams,
@@ -46,4 +53,5 @@ export type {
     RemoveUserParams,
     LoginParams,
     RegisterUserParams,
+    RegisterVerifyParams,
 };

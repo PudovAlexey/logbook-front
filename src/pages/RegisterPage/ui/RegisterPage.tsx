@@ -26,7 +26,7 @@ function RegisterPage({ navigation }: NativeStackHeaderProps) {
                 description: JSON.stringify(error),
             });
         } else {
-            navigation.replace('login');
+            navigation.push('verificationCode');
         }
     });
   };
@@ -37,6 +37,20 @@ function RegisterPage({ navigation }: NativeStackHeaderProps) {
         justifyContent="center"
         gap={10}
       >
+
+<Input
+          labelProps={{
+            label: 'email',
+            status: 'error',
+          }}
+          //   validationText={validationErrors?.password?.message}
+          onChangeText={(e) => setRegisterForm((prev) => ({
+              ...prev,
+              email: e,
+            }))}
+          value={registerForm.email}
+/>
+
         <Input
           labelProps={{
             label: 'name',

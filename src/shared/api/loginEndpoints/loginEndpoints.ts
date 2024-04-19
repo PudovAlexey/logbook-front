@@ -1,6 +1,6 @@
 import { builder } from '../apiHandlers';
 import {
- LoginParams, RefreshTokensParams, RegisterUserParams, RemoveUserParams, RequestVerificationCodeParams, SubmitChangePasswordParams,
+ LoginParams, RefreshTokensParams, RegisterUserParams, RegisterVerifyParams, RemoveUserParams, RequestVerificationCodeParams, SubmitChangePasswordParams,
 } from './types';
 
 const loginEndpoints = {
@@ -57,6 +57,14 @@ const loginEndpoints = {
             method: 'POST',
         }),
     }),
+
+    registerVerify: builder.mutation<any, RegisterVerifyParams>(({
+        query: ({ body, id }) => ({
+            url: `register/verify/${id}`,
+            method: 'POST',
+            body,
+        }),
+    })),
 };
 
 export {

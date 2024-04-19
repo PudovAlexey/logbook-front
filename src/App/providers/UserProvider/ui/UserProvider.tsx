@@ -5,6 +5,7 @@ import { observer } from 'mobx-react-lite';
 import { useLazyMutation } from '@shared/lib/queryHooks/UseLazyMutation';
 import { loginEndpoints } from '@shared/api/loginEndpoints/loginEndpoints';
 import { useAsyncStorage } from '@shared/lib/hooks/useAsyncStorage';
+import { RegisterUserParams } from '@shared/api/loginEndpoints/types';
 import { User, userSlice } from '../model/UserSlice';
 
 type LoginUserHandlers = {
@@ -35,13 +36,11 @@ const UserProvider = observer(({ children }: PropsWithChildren) => {
   const refreshTokensMutation = useLazyMutation(loginEndpoints.refreshTokens);
 
   const refreshTokensHandler = useCallback(async ({ id, refreshToken }: { id: string; refreshToken: string }) => {
-    console.log(id, refreshToken);
     if (id && refreshToken) {
       const res = await refreshTokensMutation({
         refreshToken,
         uuid: id,
       });
-
 
       if (res.data) {
         setRefreshToken(res.data.token.refresh_token);
@@ -85,11 +84,12 @@ const UserProvider = observer(({ children }: PropsWithChildren) => {
     <UserContext.Provider
       value={useMemo(
         () => ({
+          userId,
           user: user || null,
           refreshTimer,
           setRefreshTimer,
         }),
-        [user, refreshTimer, setRefreshTimer],
+        [user, refreshTimer, setRefreshTimer, userId],
       )}
     >
       {children}
@@ -110,6 +110,7 @@ const useLoginHandlers = () => {
   const logoutMutation = useLazyMutation(loginEndpoints.logout);
   const loginMutation = useLazyMutation(loginEndpoints.login);
   const removeUserMutation = useLazyMutation(loginEndpoints.removeUser);
+  const registerUserMutation = useLazyMutation(loginEndpoints.registerUser);
 
   const loginUserHandler: LoginUserHandlers['loginUserHandler'] = useCallback(async ({ login, password }) => {
     const res = await loginMutation({
@@ -143,10 +144,25 @@ const useLoginHandlers = () => {
       removeUserMutation({ id: user.id });
     }
   };
+
+  const registerUserHandler = ({ registerForm, onError, onSuccess }: {registerForm: RegisterUserParams['body'], onError: () => void, onSuccess: () => void}) => {
+    registerUserMutation({
+      body: registerForm as RegisterUserParams['body'],
+}).then(({ data, error }) => {
+  if (error) {
+    onError(error);
+} else {
+  setUserId(data.data);
+  onSuccess(data);
+}
+});
+  };
+
   return {
     loginUserHandler,
     logoutUserHandler,
     removeUserHandler,
+    registerUserHandler,
   };
 };
 

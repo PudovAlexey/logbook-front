@@ -3,6 +3,7 @@ import { Main } from '@pages/Main';
 import { ProfilePage } from '@pages/ProfilePage/ProfilePage';
 import { ForgotPasswordPage } from '@pages/ForgotPasswordPage/ui/ForgotPasswordPage';
 import { RegisterPage } from '@pages/RegisterPage/ui/RegisterPage';
+import { RegisterVerificationCodePage } from '@pages/RegisterVerificationCodePage/ui/RegisterVerificationCodePage';
 import { User } from '../UserProvider/model/UserSlice';
 
 type AvailableScreensConfig = (user: User | null) => {
@@ -12,6 +13,16 @@ type AvailableScreensConfig = (user: User | null) => {
 
 const availableScreensConfig: AvailableScreensConfig = (user) => {
   const baseRouters = [
+{
+      name: 'login',
+      component: LoginPage,
+},
+
+{
+  name: 'verificationCode',
+  component: RegisterVerificationCodePage,
+},
+
 {
   name: 'main',
   component: Main,
@@ -30,16 +41,7 @@ const availableScreensConfig: AvailableScreensConfig = (user) => {
 },
 ];
 
-  if (!user) {
-    baseRouters.unshift(
-          {
-      name: 'login',
-      component: LoginPage,
-    },
-    );
-  }
-
-  return baseRouters;
+return baseRouters;
 };
 
 export { availableScreensConfig };
