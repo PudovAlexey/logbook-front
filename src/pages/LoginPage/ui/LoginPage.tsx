@@ -7,13 +7,33 @@ import { useLoginHandlers } from '@app/providers/UserProvider/ui/UserProvider';
 import { useBackandStatuses } from '@shared/lib/apiHooks/useBackandErrors';
 import { useNotification } from '@shared/ui/AlertContext/ui/AlertContext';
 import { PageWrapper } from '@shared/ui/PageWrapper/ui/PageWrapper';
+import { StyleSheet, Text, View } from 'react-native';
+import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 
 type LoginState = {
   login: string;
   password: string;
 };
 
-function LoginPage({ navigation }) {
+const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+    rowGap: 4,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    // marginTop: 8,
+    // backgroundColor: 'aliceblue',
+    // maxHeight: 400,
+    // flexWrap: 'wrap',
+    // alignContent: 'flex-start',
+    // padding: 10,
+  },
+
+  formContainer: {},
+});
+
+function LoginPage({ navigation }: NativeStackHeaderProps) {
   const notify = useNotification();
   const { validationErrors, setValidationErrors } = useBackandStatuses();
   const loginHandlers = useLoginHandlers();
@@ -23,7 +43,9 @@ function LoginPage({ navigation }) {
     password: '',
   });
 
-  const createAccauntHandler = () => {};
+  const createAccauntHandler = () => {
+    navigation.push('register');
+  };
 
   const loginHandler = async () => {
     const res = await loginHandlers?.loginUserHandler({
@@ -51,56 +73,49 @@ function LoginPage({ navigation }) {
 
   return (
     <PageWrapper>
-      <HStack
-        height="100%"
-        width="100%"
+      <VStack
         justifyContent="center"
-        alignItems="center"
+        gap={10}
       >
-        <VStack height="auto" gap={18}>
-          <Input
-            status="error"
-            validationText={validationErrors?.email?.message}
-            label="login"
-            onChangeText={(e) =>
-              setLoginForm((prev) => ({
-                ...prev,
-                login: e,
-              }))
-            }
-            value={loginForm.login}
-          />
+        <Input
+          status="error"
+          validationText={validationErrors?.email?.message}
+          label="login"
+          onChangeText={(e) => setLoginForm((prev) => ({
+              ...prev,
+              login: e,
+            }))}
+          value={loginForm.login}
+        />
 
-          <Input
-            secureTextEntry
-            label="password"
-            status="error"
-            validationText={validationErrors?.password?.message}
-            onChangeText={(e) =>
-              setLoginForm((prev) => ({
-                ...prev,
-                password: e,
-              }))
-            }
-            value={loginForm.password}
-          />
-          <VStack gap={4}>
-            <Button onPress={loginHandler}>login</Button>
-            <Button
-              type="clear"
-              onPress={createAccauntHandler}
-            >
-              create accaunt
-            </Button>
-            <Button
-              type="clear"
-              onPress={forgotPasswordHandler}
-            >
-              forgot password
-            </Button>
-          </VStack>
+        <Input
+          secureTextEntry
+          label="password"
+          status="error"
+          validationText={validationErrors?.password?.message}
+          onChangeText={(e) => setLoginForm((prev) => ({
+              ...prev,
+              password: e,
+            }))}
+          value={loginForm.password}
+        />
+
+        <VStack height="auto" gap={4}>
+          <Button onPress={loginHandler}>login</Button>
+          <Button
+            type="clear"
+            onPress={createAccauntHandler}
+          >
+            create accaunt
+          </Button>
+          <Button
+            type="clear"
+            onPress={forgotPasswordHandler}
+          >
+            forgot password
+          </Button>
         </VStack>
-      </HStack>
+      </VStack>
     </PageWrapper>
   );
 }

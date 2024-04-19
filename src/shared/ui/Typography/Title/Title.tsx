@@ -10,6 +10,7 @@ function Title(props: PropsWithChildren<TitleProps>) {
     ...style[`h${size}`],
     ...parentStyle,
     ...style.color,
+    ...style.alignment,
   }}
 >
 {children}

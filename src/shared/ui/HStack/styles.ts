@@ -22,6 +22,7 @@ const styles = ({
      gap,
      width,
      height,
+     flex: 1,
      flexWrap: wrap ? 'wrap' : 'nowrap',
     },
 

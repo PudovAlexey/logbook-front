@@ -12,7 +12,7 @@ function LabelComponent(props: PropsWithChildren<LabelComponentProps>) {
   const styles = useStyles(props);
   return (
     <View style={styles.root}>
-      <VStack width="100%" alignItems="flex-start" gap={6}>
+      <VStack width="100%" height="auto" alignItems="flex-start" gap={6}>
       {label && (
         <Typography.Text>
           {label}

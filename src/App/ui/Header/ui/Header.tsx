@@ -4,7 +4,8 @@ import { Typography } from '@shared/ui/Typography';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import { useGetUser } from '@app/providers/UserProvider/ui/UserProvider';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
+import { View } from 'react-native';
 import { styles } from './styles';
 
 function Header({ navigation }: NativeStackHeaderProps) {
@@ -22,21 +23,27 @@ function Header({ navigation }: NativeStackHeaderProps) {
         navigation.pop();
     };
 
+   const title = useMemo(() => {
+    const word = navigation.getState().routes[navigation.getState().routes.length - 1].name;
+    return word[0].toUpperCase() + word.slice(1);
+   }, [navigation]);
+
   return (
-        <HStack style={styles.headerContainer} width="100%" justifyContent="space-between" alignItems="center">
-          <Button onPress={onBack} type="clear">
-        <Icon name="arrowleft" />
-          </Button>
-            <Typography.Title>Name</Typography.Title>
-          <HStack gap={10} width="auto">
-            <Button onPress={navToLogin} type="clear">
-              <Icon name="login" />
-            </Button>
-            <Button type="clear">
-            <Icon name="menu-unfold" />
-            </Button>
-          </HStack>
-        </HStack>
+  <View style={styles.headerContainer}>
+    <View>
+<Button onPress={onBack} shape="square" size="s" type="clear">
+    <Icon size={16} name="arrowleft" />
+</Button>
+    </View>
+    <View style={styles.headerItem}>
+<Typography.Title alignment="center">{title}</Typography.Title>
+    </View>
+    <View>
+<Button onPress={navToLogin} shape="square" size="s" type="clear">
+    {user ? <Icon size={16} name="user" /> : <Icon size={16} name="login" />}
+</Button>
+    </View>
+  </View>
   );
 }
 

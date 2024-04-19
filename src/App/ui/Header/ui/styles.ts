@@ -3,11 +3,21 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     headerContainer: {
       backgroundColor: '#397af8',
-      width: '100%',
-      paddingVertical: 15,
+      // width: '33%',      // paddingVertical: 15,
       paddingLeft: 15,
       paddingRight: 15,
+      flex: 1,
+      display: 'flex',
+      flexWrap: 'nowrap',
+      flexDirection: 'row',
+      alignItems: 'center',
     },
+    headerItem: {
+      flexBasis: 100,
+      flexGrow: 1,
+    },
+
+
     heading: {
       color: 'white',
       fontSize: 22,

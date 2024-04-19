@@ -1,5 +1,7 @@
 import { builder } from '../apiHandlers';
-import { LoginParams, RefreshTokensParams, RemoveUserParams, RequestVerificationCodeParams, SubmitChangePasswordParams } from './types';
+import {
+ LoginParams, RefreshTokensParams, RegisterUserParams, RemoveUserParams, RequestVerificationCodeParams, SubmitChangePasswordParams,
+} from './types';
 
 const loginEndpoints = {
     login: builder.mutation<any, LoginParams>({
@@ -45,6 +47,14 @@ const loginEndpoints = {
             url: `reset_password/${email}`,
             method: 'POST',
             body,
+        }),
+    }),
+
+    registerUser: builder.mutation<any, RegisterUserParams>({
+        query: ({ body }) => ({
+            url: 'register',
+            body,
+            method: 'POST',
         }),
     }),
 };

@@ -20,8 +20,9 @@ const styles = ({
      alignItems,
      height,
      flexDirection: direction === 'column' ? 'column' : 'column-reverse',
-     gap,
+     rowGap: gap,
      width,
+    //  flex: 1,
      flexWrap: wrap ? 'wrap' : 'nowrap',
     },
 

@@ -32,6 +32,7 @@ function NavigationProvider({ navigateRenderProps }: NavigationProviderProps) {
           <Stack.Navigator>
           {availableScreensConfig(user.user).map(({ name, component }) => (
             <Stack.Screen
+key={name}
 options={{
               // eslint-disable-next-line react/no-unstable-nested-components
               header: (props) => <Header {...props} />,

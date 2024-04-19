@@ -24,7 +24,7 @@ function App() {
           </LanguageProvider>
         </QueryClientProvider>
       )}
-    />
+      />
   </UserProvider>
   );
 }

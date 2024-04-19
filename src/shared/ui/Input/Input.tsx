@@ -4,16 +4,15 @@ import {
 import { BaseSize, BaseTypographyColor } from '@shared/api/types/uiTypes';
 import { useStyles } from './styles';
 import { LabelComponent } from '../LabelComponent/ui/LabelComponent';
+import { LabelComponentProps } from '../LabelComponent/ui/styles';
 
 export type InputProps = TextInputProps & {
   size?: BaseSize;
   inputStyle?: StyleProp<any>;
   wrapperStyle?: StyleProp<any>;
-  label?: string;
-  status?: BaseTypographyColor;
-  validationText?: string;
   addonAfter?: React.ReactNode;
   addonBefore?: React.ReactNode;
+  labelProps: LabelComponentProps
 };
 
 // function sizeIntoLevel(size: InputProps['size']) {
@@ -30,22 +29,18 @@ export type InputProps = TextInputProps & {
 function Input(props: InputProps) {
   const {
     style: inStyle,
-    label,
     wrapperStyle,
-    status,
     size = 'm',
     addonBefore,
     addonAfter,
-    validationText,
+    labelProps,
     ...otherProps
   } = props;
   const styles = useStyles();
 
   return (
     <LabelComponent
-      status={status}
-      validationText={validationText}
-      label={label}
+    {...labelProps}
     >
       <View
         style={{

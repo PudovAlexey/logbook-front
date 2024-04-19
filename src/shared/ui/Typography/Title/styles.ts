@@ -4,12 +4,16 @@ import { BaseTypographyProps } from '../types';
 
 type TitleProps = BaseTypographyProps & {
   size?: '1' | '2' | '3' | '4' | '5' | '6'
+  alignment?: 'center' | 'right' | 'auto' | 'left' | 'justify'
   }
 
 const useStyle = (props: TitleProps) => {
   const styles = useMakeTypographyToken(props.color);
 
   return StyleSheet.create({
+    alignment: {
+      textAlign: props.alignment,
+    },
     h1: {
       fontWeight: '700',
       fontSize: 64,

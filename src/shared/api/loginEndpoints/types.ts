@@ -27,10 +27,23 @@ type RemoveUserParams = {
     id: string
 }
 
+type RegisterUserParams = {
+    body: {
+        dateOfBirth: string
+        email: string
+        name: string
+        password: string
+        confirmPassword: string
+        patronymic?: string
+        surname?: string
+    }
+}
+
 export type {
     SubmitChangePasswordParams,
     RefreshTokensParams,
     RequestVerificationCodeParams,
     RemoveUserParams,
     LoginParams,
+    RegisterUserParams,
 };

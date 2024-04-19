@@ -53,7 +53,7 @@ const useStyles = () => {
 
         wrapperm: {
             borderRadius: 8,
-            maxHeight: 40,
+
         },
 
         l: {
