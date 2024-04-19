@@ -16,7 +16,7 @@ function LabelComponent(props: PropsWithChildren<LabelComponentProps>) {
       {label && (
         <Typography.Text>
           {label}
-          {required && <Typography.Caption color="error">*</Typography.Caption>}
+          {required && <Typography.Caption style={styles.requiredSpace} color="error">*</Typography.Caption>}
         </Typography.Text>
       )}
       {children}

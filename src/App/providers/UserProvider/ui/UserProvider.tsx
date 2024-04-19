@@ -27,14 +27,14 @@ const UserContext = createContext<{
 // const loginHandlersContext = createContext<LoginUserHandlers | null>(null);
 
 const UserProvider = observer(({ children }: PropsWithChildren) => {
-  const [refreshTimer, setRefreshTimer] = useState<number>(0);
   const { storage: userId, setStorage: setUserId } = useAsyncStorage('user-id', '');
   const { storage: refreshToken, setStorage: setRefreshToken } = useAsyncStorage('refresh-token', '');
   // const notification = useNotification();
   const { user } = userSlice;
+  const [refreshTimer, setRefreshTimer] = useState<number>(0);
 
   const refreshTokensMutation = useLazyMutation(loginEndpoints.refreshTokens);
-
+ 
   const refreshTokensHandler = useCallback(async ({ id, refreshToken }: { id: string; refreshToken: string }) => {
     if (id && refreshToken) {
       const res = await refreshTokensMutation({

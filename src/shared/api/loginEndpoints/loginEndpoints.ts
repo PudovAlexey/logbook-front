@@ -28,7 +28,7 @@ const loginEndpoints = {
 
     refreshTokens: builder.mutation<any, RefreshTokensParams>({
         query: ({ refreshToken, uuid }) => ({
-            url: `/refresh-tokens?refresh_token=${refreshToken}&id=${uuid}`,
+            url: `refresh-tokens?id=${uuid}&refresh_token=${refreshToken}`,
             method: 'POST',
         }),
     }),

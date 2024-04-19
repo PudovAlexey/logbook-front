@@ -2,8 +2,8 @@ import { Button } from '@shared/ui/Button/ui/Button';
 import { HStack } from '@shared/ui/HStack/HStack';
 import { Input } from '@shared/ui/Input/Input';
 import { VStack } from '@shared/ui/VStack/VStack';
-import { useState } from 'react';
-import { useLoginHandlers } from '@app/providers/UserProvider/ui/UserProvider';
+import { useEffect, useState } from 'react';
+import { useGetUser, useLoginHandlers } from '@app/providers/UserProvider/ui/UserProvider';
 import { useBackandStatuses } from '@shared/lib/apiHooks/useBackandErrors';
 import { useNotification } from '@shared/ui/AlertContext/ui/AlertContext';
 import { PageWrapper } from '@shared/ui/PageWrapper/ui/PageWrapper';
@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
 });
 
 function LoginPage({ navigation }: NativeStackHeaderProps) {
+  const {user} = useGetUser();
   const notify = useNotification();
   const { validationErrors, setValidationErrors } = useBackandStatuses();
   const loginHandlers = useLoginHandlers();
@@ -62,7 +63,7 @@ function LoginPage({ navigation }: NativeStackHeaderProps) {
 
       notify?.notify({
         status: 'success',
-        message: JSON.stringify(res),
+        message: 'success',
       });
     }
   };
@@ -71,6 +72,12 @@ function LoginPage({ navigation }: NativeStackHeaderProps) {
     navigation.push('forgotPassword');
   };
 
+  useEffect(() => {
+    if (user) {
+      navigation.replace('main');
+    }
+  }, [user, navigation]);
+
   return (
     <PageWrapper>
       <VStack
@@ -78,29 +85,41 @@ function LoginPage({ navigation }: NativeStackHeaderProps) {
         gap={10}
       >
         <Input
-          status="error"
-          validationText={validationErrors?.email?.message}
-          label="login"
-          onChangeText={(e) => setLoginForm((prev) => ({
+          labelProps={{
+            label: 'login',
+            validationText: validationErrors?.email?.message,
+            required: true,
+          }}
+          onChangeText={(e) =>
+            setLoginForm((prev) => ({
               ...prev,
               login: e,
-            }))}
+            }))
+          }
           value={loginForm.login}
         />
 
         <Input
+          labelProps={{
+            label: 'password',
+            validationText: validationErrors?.password?.message,
+            status: 'error',
+            required: true,
+          }}
           secureTextEntry
-          label="password"
-          status="error"
-          validationText={validationErrors?.password?.message}
-          onChangeText={(e) => setLoginForm((prev) => ({
+          onChangeText={(e) =>
+            setLoginForm((prev) => ({
               ...prev,
               password: e,
-            }))}
+            }))
+          }
           value={loginForm.password}
         />
 
-        <VStack height="auto" gap={4}>
+        <VStack
+          height="auto"
+          gap={4}
+        >
           <Button onPress={loginHandler}>login</Button>
           <Button
             type="clear"

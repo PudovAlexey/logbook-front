@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 
 type LabelComponentProps = {
     label?: string
-    required?: string
+    required?: boolean
     validationText?: string
     status?: BaseTypographyColor
 }
@@ -13,6 +13,10 @@ const useStyles = () => {
         root: {
             position: 'relative',
             width: '100%',
+        },
+
+        requiredSpace: {
+            marginLeft: 6,
         },
 
         caption: {
