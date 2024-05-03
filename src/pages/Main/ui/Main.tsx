@@ -3,6 +3,7 @@ import { Tab, Text, TabView } from '@rneui/themed';
 import { View, StyleSheet } from 'react-native';
 import { Button } from '@shared/ui/Button/ui/Button';
 import { useNotification } from '@shared/ui/AlertContext/ui/AlertContext';
+import { LogbookTab } from '@widgets/LogBookTab/ui/LogbookTab/LogbookTab';
 
 function Main() {
   const notify = useNotification();
@@ -32,9 +33,9 @@ function Main() {
         <View style={styles.container}>
           <TabView value={index} onChange={setIndex} animationType="spring">
             <TabView.Item style={{ backgroundColor: 'white', width: '100%' }}>
-              {/* <Text>Main</Text> */}
-              {/* <LogbookTab/> */}
-              <Button onPress={handleNotificationTest}>ckick</Button>
+            <Text h1>Favorite new</Text>
+              {/* <LogbookTab /> */}
+              {/* <Button onPress={handleNotificationTest}>ckick</Button> */}
             </TabView.Item>
             <TabView.Item style={{ backgroundColor: 'blue', width: '100%' }}>
               <Text h1>Favorite new</Text>

@@ -50,9 +50,15 @@ function useLazyMutation<P, R>(endpointMutation: MutationEndpoint<P, R>) {
       method: endpoint.method,
     }).then(async (res) => {
       if (!res.ok) {
-        return {
-          error: await res.json(),
-        };
+        try {
+          return {
+            error: await res.json(),
+          };
+        } catch (e) {
+          return {
+            error: `${res.status} ${res.statusText}`,
+          };
+        }
       }
       return res.json();
     });

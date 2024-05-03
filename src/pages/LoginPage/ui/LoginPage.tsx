@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 });
 
 function LoginPage({ navigation }: NativeStackHeaderProps) {
-  const {user} = useGetUser();
+  const { user } = useGetUser();
   const notify = useNotification();
   const { validationErrors, setValidationErrors } = useBackandStatuses();
   const loginHandlers = useLoginHandlers();
@@ -54,10 +54,13 @@ function LoginPage({ navigation }: NativeStackHeaderProps) {
       password: loginForm.password,
     });
 
-    // console.log(navigation);
-
-    if (res.error) {
+    if (res.error && res.error.detail) {
       setValidationErrors(res.error.detail);
+    } else if (res.error) {
+      notify?.notify({
+        status: 'error',
+        message: res.error,
+      });
     } else {
       navigation.replace('main');
 
@@ -90,12 +93,10 @@ function LoginPage({ navigation }: NativeStackHeaderProps) {
             validationText: validationErrors?.email?.message,
             required: true,
           }}
-          onChangeText={(e) =>
-            setLoginForm((prev) => ({
+          onChangeText={(e) => setLoginForm((prev) => ({
               ...prev,
               login: e,
-            }))
-          }
+            }))}
           value={loginForm.login}
         />
 
@@ -107,12 +108,10 @@ function LoginPage({ navigation }: NativeStackHeaderProps) {
             required: true,
           }}
           secureTextEntry
-          onChangeText={(e) =>
-            setLoginForm((prev) => ({
+          onChangeText={(e) => setLoginForm((prev) => ({
               ...prev,
               password: e,
-            }))
-          }
+            }))}
           value={loginForm.password}
         />
 
