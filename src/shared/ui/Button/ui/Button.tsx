@@ -16,7 +16,8 @@ function Button(props: PropsWithChildren<ButtonProps>) {
     <RenuiButton
     {...pros}
     containerStyle={{
-      width: '100%',
+      width: 'auto',
+      alignSelf: 'stretch',
     }}
     style={{
       ...styles[`${shape}-${size}`],

@@ -27,7 +27,7 @@ function ProfilePage() {
 gap={16}
 justifyContent="center"
 style={{
-      height: '100%',
+      flex: '1',
     }}
     >
       <UserAvatarEditor />

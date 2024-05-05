@@ -7,17 +7,22 @@ const useStyles = () => {
     return StyleSheet.create({
 
       'wrapper': {
-        width: '100%',
+        alignSelf: 'center',
+      //   // width: '100%',
        overflow: 'hidden',
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: theme.colors.colorBorder(),
-        display: 'flex',
-        flexDirection: 'row',
+      //   display: 'flex',
+      //   flexDirection: 'row',
+        flex: 1,
+
     },
 
     'input': {
-      width: '100%',
+      alignSelf: 'center',
+      // width: '100%',
+      flex: 1,
     },
 
         xs: {
@@ -53,6 +58,7 @@ const useStyles = () => {
 
         wrapperm: {
             borderRadius: 8,
+            maxHeight: 48,
 
         },
 

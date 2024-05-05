@@ -2,11 +2,13 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     tabWrapper: {
-        position: 'relative',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100%',
+        paddingLeft: 12,
+        paddingRight: 12,
+        // position: 'relative',
+        // display: 'flex',
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        // flex: 1,
     },
 
     topDivesInfo: {
@@ -23,7 +25,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 0,
         bottom: 0,
-        height: '100%',
+        flex: 1,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',

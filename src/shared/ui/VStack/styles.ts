@@ -6,23 +6,26 @@ type VStackProps = {
     alignItems?: FlexAlignType
     direction?: 'column' | 'reverse'
     gap?: 2 | 4 | 6 | 8 | 10 | 12 | 14 | 16 | 18 | 20 | 22 | 24 | 32 | 64
-    width?: DimensionValue
     wrap?: boolean
-    height?: DimensionValue
+    flex?: number
+    alignSelf?: FlexAlignType
+    height?: DimensionValue,
+    width?: DimensionValue
 }
 
 const styles = ({
- justifyContent, alignItems = 'center', direction = 'column', gap, width = '100%', height = '100%', wrap,
+ justifyContent, alignItems = 'center', direction = 'column', gap, wrap, flex, alignSelf = 'stretch', width = 'auto', height = 'auto',
 }: VStackProps) => StyleSheet.create({
     style: {
      display: 'flex',
      justifyContent,
      alignItems,
-     height,
      flexDirection: direction === 'column' ? 'column' : 'column-reverse',
      rowGap: gap,
+     flex,
+     alignSelf,
      width,
-    //  flex: 1,
+     height,
      flexWrap: wrap ? 'wrap' : 'nowrap',
     },
 

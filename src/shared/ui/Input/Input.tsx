@@ -1,5 +1,6 @@
 import {
  View, TextInput, StyleProp, TextInputProps,
+ DimensionValue,
 } from 'react-native';
 import { BaseSize, BaseTypographyColor } from '@shared/api/types/uiTypes';
 import { useStyles } from './styles';
@@ -12,7 +13,7 @@ export type InputProps = TextInputProps & {
   wrapperStyle?: StyleProp<any>;
   addonAfter?: React.ReactNode;
   addonBefore?: React.ReactNode;
-  labelProps: LabelComponentProps
+  labelProps?: LabelComponentProps
 };
 
 // function sizeIntoLevel(size: InputProps['size']) {

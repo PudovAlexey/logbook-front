@@ -35,7 +35,7 @@ const useStyles = (props: AlertProps) => {
 
   return StyleSheet.create({
     alert: {
-      width: '100%',
+      // width: '100%',
       borderRadius: 12,
       paddingLeft: 12,
       paddingRight: 12,

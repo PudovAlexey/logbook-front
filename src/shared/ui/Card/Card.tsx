@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import { useStyle } from './styles';
 import { VStack } from '../VStack/VStack';
 
@@ -13,7 +13,11 @@ function Card() {
   const style = useStyle();
   return (
     <VStack justifyContent="center" style={style.card}>
-      <Text style={style.image}>Image</Text>
+      <View style={style.imageWrapper}>
+        <View>
+        <Text style={style.image}>Image</Text>
+        </View>
+      </View>
       <VStack gap={4} alignItems="flex-start">
         <Text style={style.testFont}>MY CUSTOM TITLE</Text>
         <Text>My custom description My custom description My custom description My custom description</Text>

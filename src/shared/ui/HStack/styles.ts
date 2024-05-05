@@ -12,7 +12,7 @@ type HStackProps = {
 }
 
 const styles = ({
- justifyContent, alignItems = 'center', direction = 'row', gap, width = '100%', wrap, height = '100%',
+ justifyContent, alignItems = 'center', direction = 'row', gap, width = 'auto', wrap, height = '100%',
 }: HStackProps) => StyleSheet.create({
     style: {
      display: 'flex',
@@ -20,9 +20,11 @@ const styles = ({
      alignItems,
      flexDirection: direction === 'row' ? 'row' : 'row-reverse',
      gap,
-     width,
-     height,
-     flex: 1,
+    //  width,
+    //  height,
+    //  flex: 1,
+    flex: 1,
+    alignSelf: 'stretch',
      flexWrap: wrap ? 'wrap' : 'nowrap',
     },
 
