@@ -1,7 +1,22 @@
 type GetLogInfoListParams = {
-    offset: number
-    limit: number
-    searchQuery: string
+    offset?: number
+    limit?: number
+    searchQuery?: string
+};
+
+type GetLogbookListReqItem = {
+    depth: number
+    description: string
+    endDatetime: string
+    endPressure: number
+    id: number
+    sideView: number
+    startDateTime: string
+    startPressure: number
+    title: string
+    userId: string
+    vawePower: null
+    waterTemperature: number
 };
 
 type PostLogInfoListParams = {
@@ -45,4 +60,5 @@ export type {
     PostLogInfoListParams,
     GetLogInfoByIdParams,
     PutLogInfoByIdParams,
+    GetLogbookListReqItem,
 };

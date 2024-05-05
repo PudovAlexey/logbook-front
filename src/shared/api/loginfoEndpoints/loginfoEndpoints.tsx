@@ -1,23 +1,25 @@
 import { builder } from '../apiHandlers';
-import { GetLogInfoByIdParams, GetLogInfoListParams, PostLogInfoListParams, PutLogInfoByIdParams } from './types';
+import {
+ GetLogInfoByIdParams, GetLogInfoListParams, GetLogbookListReqItem, PostLogInfoListParams, PutLogInfoByIdParams,
+} from './types';
 
 const loginfoEndpoints = {
 
-    getLogInfoList: builder.query<any, GetLogInfoListParams>({
+    getLogInfoList: builder.query<GetLogbookListReqItem[], GetLogInfoListParams>({
         query: (params) => ({
-            url: '/log_info',
+            url: 'log_info',
         }),
     }),
 
     getLogInfoById: builder.query<any, GetLogInfoByIdParams>({
         query: ({ id }: GetLogInfoByIdParams) => ({
-            url: `/log_info/${id}`,
+            url: `log_info/${id}`,
         }),
     }),
 
     postLogInfoList: builder.mutation<any, PostLogInfoListParams>({
         query: ({ body }) => ({
-            url: '/log_info',
+            url: 'log_info',
             method: 'POST',
             body,
         }),
@@ -25,7 +27,7 @@ const loginfoEndpoints = {
 
     putLogInfoList: builder.mutation<any, PutLogInfoByIdParams>({
         query: ({ body, id }) => ({
-            url: `/log_info/${id}`,
+            url: `log_info/${id}`,
             method: 'PUT',
             body,
         }),

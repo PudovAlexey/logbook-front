@@ -7,10 +7,8 @@ const useStyle = makeStyles(() => ({
     imageWrapper: {
         borderRadius: 12,
         height: 200,
-        // width: '100%',
         alignSelf: 'stretch',
         flex: 1,
-        // justifyContent: 'center',
         backgroundColor: 'green',
 
     },

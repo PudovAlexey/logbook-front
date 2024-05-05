@@ -40,9 +40,9 @@ function Input(props: InputProps) {
   const styles = useStyles();
 
   return (
-    <LabelComponent
-    {...labelProps}
-    >
+    // <LabelComponent
+    // {...labelProps}
+    // >
       <View
         style={{
           ...styles.wrapper,
@@ -80,7 +80,7 @@ function Input(props: InputProps) {
           </View>
         )}
       </View>
-    </LabelComponent>
+    // </LabelComponent>
   );
 }
 

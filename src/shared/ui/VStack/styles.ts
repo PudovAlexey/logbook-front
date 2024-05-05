@@ -14,7 +14,13 @@ type VStackProps = {
 }
 
 const styles = ({
- justifyContent, alignItems = 'center', direction = 'column', gap, wrap, flex, alignSelf = 'stretch', width = 'auto', height = 'auto',
+ justifyContent = 'flex-start',
+ alignItems = 'center',
+ direction = 'column', gap,
+ wrap, flex = 1,
+ alignSelf = 'stretch',
+ width = 'auto',
+ height = 'auto',
 }: VStackProps) => StyleSheet.create({
     style: {
      display: 'flex',

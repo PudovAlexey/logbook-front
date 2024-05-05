@@ -3,6 +3,7 @@ import { RecursivePartial } from '@rneui/themed/dist/config/theme';
 
 const dark: RecursivePartial<Colors> = {
     // accepted
+    colorFillPrimary: (a: number | undefined = 1) => `rgba(177, 180, 184, ${a})`,
     colorFillSecondary: (a: number | undefined = 1) => `rgba(177, 180, 184, ${a})`,
 
     colorError: (a: number | undefined = 1) => `rgba(234, 41, 41, ${a})`,

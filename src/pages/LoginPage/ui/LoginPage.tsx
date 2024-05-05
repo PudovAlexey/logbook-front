@@ -7,8 +7,11 @@ import { useGetUser, useLoginHandlers } from '@app/providers/UserProvider/ui/Use
 import { useBackandStatuses } from '@shared/lib/apiHooks/useBackandErrors';
 import { useNotification } from '@shared/ui/AlertContext/ui/AlertContext';
 import { PageWrapper } from '@shared/ui/PageWrapper/ui/PageWrapper';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+ StyleSheet, Text, TextInput, View,
+} from 'react-native';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
+import { useStyles } from './styles';
 
 type LoginState = {
   login: string;
@@ -34,6 +37,7 @@ const styles = StyleSheet.create({
 });
 
 function LoginPage({ navigation }: NativeStackHeaderProps) {
+  const styles = useStyles();
   const { user } = useGetUser();
   const notify = useNotification();
   const { validationErrors, setValidationErrors } = useBackandStatuses();
@@ -82,9 +86,21 @@ function LoginPage({ navigation }: NativeStackHeaderProps) {
   }, [user, navigation]);
 
   return (
-    <PageWrapper>
+    // <PageWrapper mode="centered">
+    //    <Input />
+    // </PageWrapper>
+    // <VStack alignSelf="center" justifyContent="center">
+    //   <Text>test</Text>
+    //   <Text>test</Text>
+    // </VStack>
+    // <View style={styles.layout}>
+    //   <View style={styles.wrapper}>
+    //   </View>
+    // </View>
+    <PageWrapper mode="centered">
       <VStack
         justifyContent="center"
+        flex={undefined}
         gap={10}
       >
         <Input
@@ -115,10 +131,11 @@ function LoginPage({ navigation }: NativeStackHeaderProps) {
           value={loginForm.password}
         />
 
-        <VStack
-          height="auto"
+        {/* <VStack
+          // justifyContent="center"
+          flex={undefined}
           gap={4}
-        >
+        > */}
           <Button onPress={loginHandler}>login</Button>
           <Button
             type="clear"
@@ -132,7 +149,7 @@ function LoginPage({ navigation }: NativeStackHeaderProps) {
           >
             forgot password
           </Button>
-        </VStack>
+        {/* </VStack> */}
       </VStack>
     </PageWrapper>
   );

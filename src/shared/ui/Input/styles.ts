@@ -7,8 +7,8 @@ const useStyles = () => {
     return StyleSheet.create({
 
       'wrapper': {
-        alignSelf: 'center',
-      //   // width: '100%',
+        alignSelf: 'stretch',
+        width: '100%',
        overflow: 'hidden',
         borderWidth: 1,
         borderStyle: 'solid',
@@ -20,7 +20,7 @@ const useStyles = () => {
     },
 
     'input': {
-      alignSelf: 'center',
+      alignSelf: 'stretch',
       // width: '100%',
       flex: 1,
     },

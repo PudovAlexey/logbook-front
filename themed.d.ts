@@ -32,6 +32,7 @@ declare module '@rneui/themed' {
 
     colorBorder: (a?: number) => string
     colorFillSecondary: (a?: number) => string
+    colorFillPrimary: (a?: number) => string
     //
     tertiary: string;
     accent: string;

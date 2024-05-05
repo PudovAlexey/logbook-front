@@ -4,12 +4,13 @@ import { useStyle } from './styles';
 import { VStack } from '../VStack/VStack';
 
 export type CardProps = {
-    title: string
-    description: string
+    title?: string
+    description?: string
 
 }
 
-function Card() {
+function Card(props: CardProps) {
+  const { title } = props;
   const style = useStyle();
   return (
     <VStack justifyContent="center" style={style.card}>
