@@ -7,6 +7,8 @@ import { useNotification } from '@shared/ui/AlertContext/ui/AlertContext';
 import { loginEndpoints } from '@shared/api/loginEndpoints/loginEndpoints';
 import { useLazyMutation } from '@shared/lib/queryHooks/UseLazyMutation';
 import { PageWrapper } from '@shared/ui/PageWrapper/ui/PageWrapper';
+import Icon from 'react-native-vector-icons/AntDesign';
+import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 
 type FormData = {
   email: string;
@@ -15,7 +17,7 @@ type FormData = {
   confirmPassword: string;
 };
 
-function ForgotPasswordPage({ navigation }) {
+function ForgotPasswordPage({ navigation }: NativeStackHeaderProps) {
   const [expireSend, setExpireSend] = useState(0);
   const notify = useNotification();
   const sendVerificationMutation = useLazyMutation(loginEndpoints.requestVerificationCode);
@@ -28,11 +30,11 @@ function ForgotPasswordPage({ navigation }) {
   });
 
   useEffect(() => {
-  if (expireSend > 0) {
-    setTimeout(() => {
-      setExpireSend((prev) => prev - 1);
-    }, 1000);
-  }
+    if (expireSend > 0) {
+      setTimeout(() => {
+        setExpireSend((prev) => prev - 1);
+      }, 1000);
+    }
   }, [expireSend]);
 
   const onChangeValue = ({ value, token }: { value: string; token: keyof FormData }) => {
@@ -75,48 +77,64 @@ function ForgotPasswordPage({ navigation }) {
   };
 
   return (
-    <PageWrapper>
-      <HStack
-      height="100%"
-      width="100%"
-      justifyContent="center"
-      alignItems="center"
+    <PageWrapper mode="centered">
+      <VStack
+        justifyContent="center"
+        gap={10}
       >
-      <VStack height="auto" width="100%" gap={4}>
         <Input
+          labelProps={{
+            label: 'email',
+            required: true,
+          }}
           value={loginForm.email}
           onChangeText={(e) => onChangeValue({ value: e, token: 'email' })}
-          label="email"
         />
         <Input
-          value={loginForm.secretCode}
-          label="secret code"
+          value={loginForm.secretCode ? String(loginForm.secretCode) : ''}
+          labelProps={{
+            label: 'secret code',
+            required: true,
+          }}
           onChangeText={(e) => onChangeValue({ value: +e, token: 'secretCode' })}
           addonAfter={(
-          <Button
-          shape="square"
-          disabled={expireSend > 0}
-            onPress={requestVerificationCode}
-          >
-{expireSend > 0 ? expireSend : 'send'}
-          </Button>
-)}
+            <Button
+              size="xl"
+              shape="square"
+              disabled={expireSend > 0}
+              onPress={requestVerificationCode}
+            >
+              {expireSend > 0 ? (
+                expireSend
+              ) : (
+                <Icon
+                  size={24}
+                  name="mail"
+                />
+              )}
+            </Button>
+          )}
         />
         <Input
           value={loginForm.password}
-          label="password"
+          labelProps={{
+            label: 'password',
+            required: true,
+          }}
           secureTextEntry
           onChangeText={(e) => onChangeValue({ value: e, token: 'password' })}
         />
         <Input
           secureTextEntry
           value={loginForm.confirmPassword}
-          label="confirm password"
+          labelProps={{
+            label: 'confirm password',
+            required: true,
+          }}
           onChangeText={(e) => onChangeValue({ value: e, token: 'confirmPassword' })}
         />
         <Button onPress={submitResetPasswordHandler}>submit</Button>
       </VStack>
-      </HStack>
     </PageWrapper>
   );
 }

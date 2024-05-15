@@ -12,9 +12,12 @@ const useStyles = () => {
     return StyleSheet.create({
         root: {
             position: 'relative',
-            alignSelf: 'center',
-            // width: 100,
-            flex: 1,
+            // flexGrow: 1,
+            // alignItems: 'stretch',
+
+            width: '100%',
+            // height: '100%',
+            // flex: 1,
         },
 
         requiredSpace: {

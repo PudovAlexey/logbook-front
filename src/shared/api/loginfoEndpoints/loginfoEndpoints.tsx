@@ -1,6 +1,6 @@
 import { builder } from '../apiHandlers';
 import {
- GetLogInfoByIdParams, GetLogInfoListParams, GetLogbookListReqItem, PostLogInfoListParams, PutLogInfoByIdParams,
+ GetLogInfoByIdParams, GetLogInfoByIdResponse, GetLogInfoListParams, GetLogbookListReqItem, PostLogInfoListParams, PutLogInfoByIdParams,
 } from './types';
 
 const loginfoEndpoints = {
@@ -11,7 +11,7 @@ const loginfoEndpoints = {
         }),
     }),
 
-    getLogInfoById: builder.query<any, GetLogInfoByIdParams>({
+    getLogInfoById: builder.query<GetLogInfoByIdResponse, GetLogInfoByIdParams>({
         query: ({ id }: GetLogInfoByIdParams) => ({
             url: `log_info/${id}`,
         }),

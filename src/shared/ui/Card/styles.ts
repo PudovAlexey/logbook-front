@@ -3,6 +3,7 @@ import { makeStyles } from '@rneui/themed';
 const useStyle = makeStyles(() => ({
     card: {
         width: 150,
+        minHeight: 300,
     },
     imageWrapper: {
         borderRadius: 12,

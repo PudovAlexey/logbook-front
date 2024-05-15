@@ -5,6 +5,7 @@ import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import { useGetUser } from '@app/providers/UserProvider/ui/UserProvider';
 import { useCallback, useMemo } from 'react';
 import { View } from 'react-native';
+import { camelCaseIntoToken } from '@shared/lib/formatters/camelCaseIntoToken';
 import { useStyles } from './styles';
 
 function Header({ navigation }: NativeStackHeaderProps) {
@@ -48,7 +49,7 @@ function Header({ navigation }: NativeStackHeaderProps) {
 )}
       </View>
       <View>
-        <Typography.Title alignment="center">{title}</Typography.Title>
+        <Typography.Title alignment="center">{camelCaseIntoToken({ value: title, token: ' ' })}</Typography.Title>
       </View>
       <View>
         <Button

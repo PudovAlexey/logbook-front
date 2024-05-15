@@ -8,13 +8,22 @@ import { useLazyQuery } from '@shared/lib/queryHooks/useLazyQuery';
 import { loginfoEndpoints } from '@shared/api/loginfoEndpoints/loginfoEndpoints';
 import { useLogsLoader } from '@widgets/LogBookTab/lib/hooks/useLogsLoader';
 import { LogbookCardItem } from '@entities/LogbookCardItem/ui/LogbookCardItem';
+import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import { useStyles } from './styles';
 import { LogInfo } from '../LogInfo/LogInfo';
 
-function LogbookTab() {
+type LogbookTabProps = {
+  navigator: NativeStackHeaderProps;
+};
+
+function LogbookTab({ navigator }: LogbookTabProps) {
   const { searchValue, setSearchValue, logsList } = useLogsLoader();
   const styles = useStyles();
   // const {t} = useTranslation();
+
+  const onLogBookTabItemClick = (tabId: number) => {
+    navigator.navigation.push('logbookPage', { tabId });
+  };
   return (
     <>
       <View style={styles.logInfo}>
@@ -29,10 +38,13 @@ function LogbookTab() {
           wrap
           gap={10}
         >
-          {logsList.map((props) => (
+          {logsList.map(({ title, description, id }) => (
             <LogbookCardItem
-              key={props.id}
-              {...props}
+              onCardClick={onLogBookTabItemClick}
+              key={id}
+              id={id}
+              title={title}
+              description={description}
             />
           ))}
         </HStack>

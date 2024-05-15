@@ -17,7 +17,7 @@ const styles = ({
  justifyContent = 'flex-start',
  alignItems = 'center',
  direction = 'column', gap,
- wrap, flex = 1,
+ wrap, flex,
  alignSelf = 'stretch',
  width = 'auto',
  height = 'auto',

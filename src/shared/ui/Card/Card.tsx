@@ -10,7 +10,7 @@ export type CardProps = {
 }
 
 function Card(props: CardProps) {
-  const { title } = props;
+  const { title, description } = props;
   const style = useStyle();
   return (
     <VStack justifyContent="center" style={style.card}>
@@ -20,9 +20,9 @@ function Card(props: CardProps) {
         </View>
       </View>
       <VStack gap={4} alignItems="flex-start">
-        <Text style={style.testFont}>MY CUSTOM TITLE</Text>
-        <Text>My custom description My custom description My custom description My custom description</Text>
-        <Text>tools</Text>
+        <Text style={style.testFont}>{title}</Text>
+        <Text>{description}</Text>
+        {/* <Text>tools</Text> */}
       </VStack>
     </VStack>
   );

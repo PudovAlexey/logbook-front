@@ -7,22 +7,21 @@ const useStyles = () => {
     return StyleSheet.create({
 
       'wrapper': {
-        alignSelf: 'stretch',
+        // height: '100%',
         width: '100%',
        overflow: 'hidden',
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: theme.colors.colorBorder(),
-      //   display: 'flex',
-      //   flexDirection: 'row',
-        flex: 1,
+        // display: 'flex',
+        flexDirection: 'row',
 
     },
 
     'input': {
-      alignSelf: 'stretch',
-      // width: '100%',
-      flex: 1,
+      // alignSelf: 'stretch',
+      width: '100%',
+      flex: 4,
     },
 
         xs: {
@@ -99,7 +98,10 @@ const useStyles = () => {
         },
 
         'addon': {
+          flex: 1,
           maxWidth: 50,
+          justifyContent: 'center',
+          height: '100%',
         },
 
         'addon-right': {

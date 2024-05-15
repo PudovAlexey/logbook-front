@@ -100,7 +100,6 @@ function LoginPage({ navigation }: NativeStackHeaderProps) {
     <PageWrapper mode="centered">
       <VStack
         justifyContent="center"
-        flex={undefined}
         gap={10}
       >
         <Input

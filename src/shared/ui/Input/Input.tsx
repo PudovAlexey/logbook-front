@@ -1,6 +1,5 @@
 import {
- View, TextInput, StyleProp, TextInputProps,
- DimensionValue,
+ View, TextInput, StyleProp, TextInputProps, DimensionValue,
 } from 'react-native';
 import { BaseSize, BaseTypographyColor } from '@shared/api/types/uiTypes';
 import { useStyles } from './styles';
@@ -13,7 +12,7 @@ export type InputProps = TextInputProps & {
   wrapperStyle?: StyleProp<any>;
   addonAfter?: React.ReactNode;
   addonBefore?: React.ReactNode;
-  labelProps?: LabelComponentProps
+  labelProps?: LabelComponentProps;
 };
 
 // function sizeIntoLevel(size: InputProps['size']) {
@@ -29,20 +28,12 @@ export type InputProps = TextInputProps & {
 
 function Input(props: InputProps) {
   const {
-    style: inStyle,
-    wrapperStyle,
-    size = 'm',
-    addonBefore,
-    addonAfter,
-    labelProps,
-    ...otherProps
-  } = props;
+ style: inStyle, wrapperStyle, size = 'm', addonBefore, addonAfter, labelProps, ...otherProps
+} = props;
   const styles = useStyles();
 
   return (
-    // <LabelComponent
-    // {...labelProps}
-    // >
+    <LabelComponent {...labelProps}>
       <View
         style={{
           ...styles.wrapper,
@@ -66,7 +57,6 @@ function Input(props: InputProps) {
             ...styles.input,
             ...styles[size],
           }}
-
           {...otherProps}
         />
         {addonAfter && (
@@ -80,7 +70,7 @@ function Input(props: InputProps) {
           </View>
         )}
       </View>
-    // </LabelComponent>
+    </LabelComponent>
   );
 }
 

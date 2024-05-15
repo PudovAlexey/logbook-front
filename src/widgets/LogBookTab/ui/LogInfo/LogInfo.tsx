@@ -2,6 +2,7 @@ import { View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { HStack } from '@shared/ui/HStack/HStack';
 import { SearchField } from '@shared/ui/SearchField/SearchField';
+import { VStack } from '@shared/ui/VStack/VStack';
 import { styles } from './styles';
 
 type LogInfoProps = {
@@ -14,7 +15,9 @@ function LogInfo({ searchValue, onSearch }: LogInfoProps) {
   return (
     <HStack style={styles.tabWrapper} gap={6} justifyContent="space-between">
       <Icon size={16} name="clockcircle" />
+      <VStack flex={1} alignSelf="stretch">
       <SearchField value={searchValue} onChangeText={(e) => onSearch(e)} size="m" />
+      </VStack>
       {/* <Icon size={16} name="arrowdown" /> */}
       <Icon size={16} name="clockcircle" />
     </HStack>

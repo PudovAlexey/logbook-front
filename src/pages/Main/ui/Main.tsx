@@ -4,8 +4,9 @@ import { View, StyleSheet } from 'react-native';
 import { Button } from '@shared/ui/Button/ui/Button';
 import { useNotification } from '@shared/ui/AlertContext/ui/AlertContext';
 import { LogbookTab } from '@widgets/LogBookTab/ui/LogbookTab/LogbookTab';
+import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 
-function Main() {
+function Main(navigator: NativeStackHeaderProps) {
   const notify = useNotification();
   //  const {t} = useTranslation();
     const [index, setIndex] = React.useState(0);
@@ -33,7 +34,7 @@ function Main() {
         <View style={styles.container}>
           <TabView value={index} onChange={setIndex} animationType="spring">
             <TabView.Item style={{ backgroundColor: 'white', width: '100%' }}>
-              <LogbookTab />
+              <LogbookTab navigator={navigator} />
               {/* <Button onPress={handleNotificationTest}>ckick</Button> */}
             </TabView.Item>
             <TabView.Item style={{ backgroundColor: 'blue', width: '100%' }}>
