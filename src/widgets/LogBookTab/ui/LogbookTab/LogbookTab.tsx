@@ -1,16 +1,12 @@
-import { Text, View } from 'react-native';
-import { Card } from '@shared/ui/Card/Card';
-import { VStack } from '@shared/ui/VStack/VStack';
+import { View } from 'react-native';
 import { PageWrapper } from '@shared/ui/PageWrapper/ui/PageWrapper';
 import { HStack } from '@shared/ui/HStack/HStack';
-import { useState } from 'react';
-import { useLazyQuery } from '@shared/lib/queryHooks/useLazyQuery';
-import { loginfoEndpoints } from '@shared/api/loginfoEndpoints/loginfoEndpoints';
 import { useLogsLoader } from '@widgets/LogBookTab/lib/hooks/useLogsLoader';
 import { LogbookCardItem } from '@entities/LogbookCardItem/ui/LogbookCardItem';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import { useStyles } from './styles';
 import { LogInfo } from '../LogInfo/LogInfo';
+import { ScrollView } from '@shared/ui/ScrollView/ui/ScrollView';
 
 type LogbookTabProps = {
   navigator: NativeStackHeaderProps;
@@ -33,11 +29,7 @@ function LogbookTab({ navigator }: LogbookTabProps) {
         />
       </View>
       <PageWrapper>
-        <HStack
-          justifyContent="space-between"
-          wrap
-          gap={10}
-        >
+        <ScrollView>
           {logsList.map(({ title, description, id }) => (
             <LogbookCardItem
               onCardClick={onLogBookTabItemClick}
@@ -47,7 +39,7 @@ function LogbookTab({ navigator }: LogbookTabProps) {
               description={description}
             />
           ))}
-        </HStack>
+        </ScrollView>
       </PageWrapper>
     </>
     // <VStack width={'100%'}>
