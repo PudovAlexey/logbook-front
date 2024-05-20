@@ -41,7 +41,7 @@ function useLazyMutation<P, R>(endpointMutation: MutationEndpoint<P, R>) {
   }> => {
     const endpoint = endpointMutation.query(params);
 
-    const query = await fetch(`${'http://192.168.1.36:8080/'}${endpoint.url}`, {
+    const query = await fetch(`${process.env.API_URL}${endpoint.url}`, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${user?.access_token}`,

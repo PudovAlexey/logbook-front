@@ -17,6 +17,11 @@ type GetLogbookListReqItem = {
   userId: string;
   vawePower: null;
   waterTemperature: number;
+  image_data?: {
+    filename: string
+    id: string
+    path: string
+  }
 };
 
 type PostLogInfoListParams = {
