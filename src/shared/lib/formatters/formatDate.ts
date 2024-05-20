@@ -1,11 +1,14 @@
-// import dayjs from 'dayjs';
+import dayjs from 'dayjs';
 
 type formatDateProps = {
-    date: string
+    date?: string
 }
 
 function formatDate({ date }: formatDateProps) {
-  return date;
+  if (date) {
+    return dayjs(date).format('DD.MM.YYYY');
+  }
+    return date;
 }
 
 export {

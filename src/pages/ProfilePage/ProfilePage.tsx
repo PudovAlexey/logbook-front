@@ -6,6 +6,7 @@ import { Button } from '@shared/ui/Button/ui/Button';
 import { Typography } from '@shared/ui/Typography';
 import { VStack } from '@shared/ui/VStack/VStack';
 import { useCallback } from 'react';
+import { View, Text } from 'react-native';
 
 function ProfilePage({ navigation }: NativeStackHeaderProps) {
   const { user } = useGetUser();
@@ -25,25 +26,39 @@ function ProfilePage({ navigation }: NativeStackHeaderProps) {
   }
 
   return (
-    <VStack
-      gap={16}
-      justifyContent="center"
-      style={{
-        flex: '1',
-      }}
-    >
+    <View>
       <UserAvatarEditor />
-      <Typography.Text>{user.email}</Typography.Text>
-      <Typography.Text>
-        {user.date_of_birth}
-        {/* {formatDate({
-        date: user.date_of_birth,
-      })} */}
-      </Typography.Text>
+      <Typography.Text>{user?.email}</Typography.Text>
+      <Text>
+{formatDate({
+        date: user?.date_of_birth,
+      })}
+      </Text>
       <Button onPress={logoutHandler}>logout</Button>
       <Button onPress={removeAccauntHandler}>remove accaunt</Button>
-    </VStack>
+    </View>
   );
+
+  // return (
+  //   <VStack
+  //     gap={16}
+  //     justifyContent="center"
+  //     style={{
+  //       flex: '1',
+  //     }}
+  //   >
+  //     <UserAvatarEditor />
+  //     <Typography.Text>{user?.email}</Typography.Text>
+  //     <Typography.Text>
+  //       {user?.date_of_birth}
+  //       {/* {formatDate({
+  //       date: user.date_of_birth,
+  //     })} */}
+  //     </Typography.Text>
+  //     <Button onPress={logoutHandler}>logout</Button>
+  //     <Button onPress={removeAccauntHandler}>remove accaunt</Button>
+  //   </VStack>
+  // );
 }
 
 export { ProfilePage };
