@@ -1,10 +1,11 @@
-import { BottomSheet } from '@rneui/base';
 import { Button } from '@shared/ui/Button/ui/Button';
 import {
  Dispatch, PropsWithChildren, SetStateAction, createContext, useContext, useMemo, useState,
 } from 'react';
 import { Text, View, Dimensions } from 'react-native';
 import Calendar from 'react-native-calendar-range-picker';
+import { BottomSheet } from '@shared/ui/BottomSheet/ui/BottomSheet';
+import { useStyles } from './styles';
 
 export type DateRange = {
   startDate?: string;
@@ -23,6 +24,7 @@ const CalendarContext = createContext<Partial<CalendarContextValue>>({});
 function CalendarRangeProvider({ children }: PropsWithChildren) {
   const windowWidth = Dimensions.get('window').height;
   const [calendarOpen, setCalendarOpen] = useState(false);
+  const styles = useStyles();
   const [dates, setDates] = useState<DateRange>({
     startDate: undefined,
     endDate: undefined,
@@ -42,25 +44,19 @@ function CalendarRangeProvider({ children }: PropsWithChildren) {
         [calendarOpen, dates],
       )}
     >
-      {calendarOpen ? (
-        <View>
-          <View style={{ height: windowWidth - 5 }}>
-            <Calendar
-              startDate={dates.startDate}
-              endDate={dates.endDate}
-              onChange={({ startDate, endDate }) => setDates({
-                  startDate,
-                  endDate,
-                })}
-            />
-          </View>
-          <Button onPress={() => setCalendarOpen(false)}>Закрыть</Button>
-        </View>
-      ) : (
-        children
-      )}
-      {/* {calendarOpen ? (
-    ) : children} */}
+      {children}
+      <BottomSheet onChangeVisibilityPress={(isOpen) => setCalendarOpen(isOpen)} isVisible={calendarOpen}>
+       <View style={{ height: windowWidth / 2 }}>
+       <Calendar
+          startDate={dates.startDate}
+          endDate={dates.endDate}
+          onChange={({ startDate, endDate }) => setDates({
+              startDate,
+              endDate,
+            })}
+       />
+       </View>
+      </BottomSheet>
     </CalendarContext.Provider>
   );
 }
