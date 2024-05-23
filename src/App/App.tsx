@@ -1,4 +1,5 @@
 import { AlertContextProvider } from '@shared/ui/AlertContext/ui/AlertContext';
+import { CalendarRangeProvider } from '@widgets/CalendarRangeWidget/ui/CalendarRangeProvider';
 import { LanguageProvider } from './providers/LanguageProvider/LanguageProvider';
 import { QueryClientProvider } from './providers/QueryClientProvider/QueryClientProvider';
 import { ThemeProvider } from './providers/ThemeProvider/ThemeProvider';
@@ -8,24 +9,24 @@ import { NavigationProvider } from './providers/NavigationProvider/NavigationPro
 
 function App() {
   return (
-  <UserProvider>
+    <UserProvider>
       <NavigationProvider
-      // eslint-disable-next-line react/no-unstable-nested-components
-      navigateRenderProps={(navigation) => (
-        <QueryClientProvider>
-          <LanguageProvider>
-            <ThemeProvider>
-              <FontProvider>
-                <AlertContextProvider>
-                {navigation}
-                </AlertContextProvider>
-              </FontProvider>
-            </ThemeProvider>
-          </LanguageProvider>
-        </QueryClientProvider>
-      )}
+        // eslint-disable-next-line react/no-unstable-nested-components
+        navigateRenderProps={(navigation) => (
+          <QueryClientProvider>
+            <LanguageProvider>
+              <ThemeProvider>
+                <FontProvider>
+                  <AlertContextProvider>
+                    <CalendarRangeProvider>{navigation}</CalendarRangeProvider>
+                  </AlertContextProvider>
+                </FontProvider>
+              </ThemeProvider>
+            </LanguageProvider>
+          </QueryClientProvider>
+        )}
       />
-  </UserProvider>
+    </UserProvider>
   );
 }
 

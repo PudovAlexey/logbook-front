@@ -1,7 +1,9 @@
 type GetLogInfoListParams = {
-  offset?: number;
-  limit?: number;
+  page?: number;
+  pageSize?: number;
   searchQuery?: string;
+  startDate?: string
+  endDate?: string
 };
 
 type GetLogbookListReqItem = {

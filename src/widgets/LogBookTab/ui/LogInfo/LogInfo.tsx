@@ -3,23 +3,47 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import { HStack } from '@shared/ui/HStack/HStack';
 import { SearchField } from '@shared/ui/SearchField/SearchField';
 import { VStack } from '@shared/ui/VStack/VStack';
+import { useCalendarTriggerState } from '@widgets/CalendarRangeWidget/ui/CalendarRangeProvider';
+import { Button } from '@shared/ui/Button/ui/Button';
 import { styles } from './styles';
 
 type LogInfoProps = {
-  searchValue: string
-  onSearch: (value: string) => void
+  searchValue?: string;
+  onSearch?: (value: string) => void;
+};
 
-}
-
-function LogInfo({ searchValue, onSearch }: LogInfoProps) {
+function LogInfo({
+ searchValue, onSearch,
+}: LogInfoProps) {
+  const { setCalendarOpen } = useCalendarTriggerState();
   return (
-    <HStack style={styles.tabWrapper} gap={6} justifyContent="space-between">
-      <Icon size={16} name="clockcircle" />
-      <VStack flex={1} alignSelf="stretch">
-      <SearchField value={searchValue} onChangeText={(e) => onSearch(e)} size="m" />
+    <HStack
+      style={styles.tabWrapper}
+      gap={6}
+      justifyContent="space-between"
+      alignItems="center"
+    >
+      {/* <Icon
+        size={16}
+        name="clockcircle"
+      /> */}
+      <VStack
+        flex={1}
+        alignSelf="stretch"
+      >
+        <SearchField
+          value={searchValue}
+          onChangeText={(e) => onSearch && onSearch(e)}
+          size="m"
+        />
       </VStack>
       {/* <Icon size={16} name="arrowdown" /> */}
-      <Icon size={16} name="clockcircle" />
+      <Button onPress={() => setCalendarOpen && setCalendarOpen(true)} type="clear">
+      <Icon
+        size={16}
+        name="clockcircle"
+      />
+      </Button>
     </HStack>
     // <View style={styles.tabWrapper}>
     //     <View style={styles.topDivesInfo}>
@@ -42,6 +66,4 @@ function LogInfo({ searchValue, onSearch }: LogInfoProps) {
   );
 }
 
-export {
-    LogInfo,
-};
+export { LogInfo };

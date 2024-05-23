@@ -1,9 +1,9 @@
-import { ScrollView, Text, View } from 'react-native';
-import { PageWrapper } from '@shared/ui/PageWrapper/ui/PageWrapper';
-import { HStack } from '@shared/ui/HStack/HStack';
+import { ScrollView, View } from 'react-native';
 import { useLogsLoader } from '@widgets/LogBookTab/lib/hooks/useLogsLoader';
 import { LogbookCardItem } from '@entities/LogbookCardItem/ui/LogbookCardItem';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
+import { useState } from 'react';
+import { useCalendarTriggerState } from '@widgets/CalendarRangeWidget/ui/CalendarRangeProvider';
 import { useStyles } from './styles';
 import { LogInfo } from '../LogInfo/LogInfo';
 
@@ -12,6 +12,7 @@ type LogbookTabProps = {
 };
 
 function LogbookTab({ navigator }: LogbookTabProps) {
+  const [dateValue, setDateValue] = useState(null);
   const { searchValue, setSearchValue, logsList } = useLogsLoader();
   const styles = useStyles();
   // const {t} = useTranslation();
