@@ -1,5 +1,6 @@
 import { useGetUser } from '@app/providers/UserProvider/ui/UserProvider';
 import { useCallback } from 'react';
+import { formatQueryParams } from '../formatters/formatQueryParams';
 
 type UrlParams = {
   url: string
@@ -19,8 +20,11 @@ function useLazyQuery<P, R>(endpointMutation: QueryEndpoint<P, R>) {
     error: any
   }> => {
       const endpoint = endpointMutation.query(params);
+      const queryParams = formatQueryParams({
+        params: endpoint.params,
+      });
 
-    const query = await fetch(`${'http://192.168.1.36:8080/'}${endpoint.url}`, {
+    const query = await fetch(`${process.env.API_URL}${endpoint.url}${queryParams}`, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${user?.access_token}`,

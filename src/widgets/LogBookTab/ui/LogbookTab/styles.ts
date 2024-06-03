@@ -31,7 +31,7 @@ const useStyles = () => {
     container: {
         // flex: 1,
     //   flexDirection: 'row',
-      flexWrap: 'wrap',
+      // flexWrap: 'wrap',
     //   alignItems: 'center',
     //   justifyContent: 'center',
       width: windowWidth,

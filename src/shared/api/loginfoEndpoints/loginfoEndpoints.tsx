@@ -8,6 +8,7 @@ const loginfoEndpoints = {
     getLogInfoList: builder.query<GetLogbookListReqItem[], GetLogInfoListParams>({
         query: (params) => ({
             url: 'log_info',
+            params,
         }),
     }),
 
