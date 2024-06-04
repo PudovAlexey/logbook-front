@@ -1,5 +1,6 @@
 import { useGetUser } from '@app/providers/UserProvider/ui/UserProvider';
 import { useCallback } from 'react';
+import { useLogger } from '@shared/ui/LoggerProvider/LoggerProvider';
 import { formatQueryParams } from '../formatters/formatQueryParams';
 
 type UrlParams = {
@@ -13,6 +14,7 @@ type QueryEndpoint<P, _R> = {
 };
 
 function useLazyQuery<P, R>(endpointMutation: QueryEndpoint<P, R>) {
+  const { loggerPush } = useLogger();
   const { user } = useGetUser();
 
   return useCallback(async (params: P): Promise<{
@@ -24,7 +26,9 @@ function useLazyQuery<P, R>(endpointMutation: QueryEndpoint<P, R>) {
         params: endpoint.params,
       });
 
-    const query = await fetch(`${process.env.API_URL}${endpoint.url}${queryParams}`, {
+      const url = `${process.env.API_URL}${endpoint.url}${queryParams}`;
+
+    const query = await fetch(url, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${user?.access_token}`,
@@ -32,6 +36,21 @@ function useLazyQuery<P, R>(endpointMutation: QueryEndpoint<P, R>) {
       method: 'GET',
     }).then(async (res) => {
       return res.json();
+    }).then((res) => {
+      loggerPush({
+        title: `query ${url}`,
+        data: res,
+        color: 'query',
+      });
+
+      return res;
+    })
+    .catch((error) => {
+       loggerPush({
+        title: `query ${url}`,
+        data: error,
+        color: 'queryError',
+      });
     });
     return query;
   }, [endpointMutation, user?.access_token]);

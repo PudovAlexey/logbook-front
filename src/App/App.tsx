@@ -1,5 +1,6 @@
 import { AlertContextProvider } from '@shared/ui/AlertContext/ui/AlertContext';
 import { CalendarRangeProvider } from '@widgets/CalendarRangeWidget/ui/CalendarRangeProvider';
+import { LoggerProvider } from '@shared/ui/LoggerProvider/LoggerProvider';
 import { LanguageProvider } from './providers/LanguageProvider/LanguageProvider';
 import { QueryClientProvider } from './providers/QueryClientProvider/QueryClientProvider';
 import { ThemeProvider } from './providers/ThemeProvider/ThemeProvider';
@@ -9,7 +10,8 @@ import { NavigationProvider } from './providers/NavigationProvider/NavigationPro
 
 function App() {
   return (
-    <UserProvider>
+   <LoggerProvider>
+     <UserProvider>
       <NavigationProvider
         // eslint-disable-next-line react/no-unstable-nested-components
         navigateRenderProps={(navigation) => (
@@ -26,7 +28,8 @@ function App() {
           </QueryClientProvider>
         )}
       />
-    </UserProvider>
+     </UserProvider>
+   </LoggerProvider>
   );
 }
 
