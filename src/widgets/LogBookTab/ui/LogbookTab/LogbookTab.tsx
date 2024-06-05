@@ -22,19 +22,17 @@ function LogbookTab({ navigator }: LogbookTabProps) {
     <View>
       <View style={styles.logInfo}>
         <LogInfo
+          navigator={navigator}
           searchValue={searchValue}
           onSearch={(e) => setSearchValue(e)}
         />
       </View>
  <View style={styles.scroller}>
  <ScrollView style={styles.scrollContainer}>
-        {/* <View style={styles.container}> */}
+        <View style={styles.container}>
           {logsList.map(({
  title, description, id, image_data,
 }) => (
-            // <View style={styles.item}>
-            //   <Text>1</Text>
-            // </View>
             <LogbookCardItem
               onCardClick={onLogBookTabItemClick}
               key={id}
@@ -44,7 +42,7 @@ function LogbookTab({ navigator }: LogbookTabProps) {
               image_data={image_data}
             />
           ))}
-        {/* </View> */}
+        </View>
  </ScrollView>
  </View>
       {/* <PageWrapper>

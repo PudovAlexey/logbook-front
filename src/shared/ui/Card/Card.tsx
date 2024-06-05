@@ -3,6 +3,7 @@ import { Text, View, Image } from 'react-native';
 import dive from '../../../../assets/dive-placeholder.jpg';
 import { useStyle } from './styles';
 import { VStack } from '../VStack/VStack';
+import { Typography } from '../Typography';
 
 export type CardProps = {
   title?: string;
@@ -40,8 +41,13 @@ function Card(props: CardProps) {
         gap={4}
         alignItems="flex-start"
       >
-        <Text style={style.testFont}>{title}</Text>
-        <Text>{description}</Text>
+        <Typography.Title size="6">{title}</Typography.Title>
+        {/* <Typography.Caption>{description}</Typography.Caption> */}
+        <Typography.Caption numberOfLines={2} ellipsizeMode="tail">
+        Очень длинное описание Очень длинное описание Очень длинное описание Очень длинное описание Очень длинное описание Очень длинное описание Очень длинное описание
+        </Typography.Caption>
+        {/* <Text style={style.testFont}>{title}</Text>
+        <Text>{description}</Text> */}
         {/* <Text>tools</Text> */}
       </VStack>
     </VStack>

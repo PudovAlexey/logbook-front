@@ -1,8 +1,8 @@
 import { BaseTypographyColor } from '@shared/api/types/uiTypes';
 import { useMakeTypographyToken } from '@shared/lib/styleHooks/useMakeTypographyToken';
-import { StyleProp, StyleSheet } from 'react-native';
+import { StyleProp, StyleSheet, TextProps } from 'react-native';
 
-type CaptionProps = {
+type CaptionProps = TextProps & {
     level?: '1' | '2' | '3' | '4'
     color?: BaseTypographyColor
     style?: StyleProp<any>
@@ -21,7 +21,7 @@ const useStyles = ({ color }: CaptionProps) => {
         2: {
             fontWeight: '300',
             fontSize: 14,
-            lineHeight: 26,
+            lineHeight: 18,
         },
 
         3: {

@@ -42,7 +42,7 @@ const useStyle = (props: TitleProps) => {
     h6: {
       fontWeight: '700',
       fontSize: 18,
-      lineHeight: 32,
+      lineHeight: 20,
     },
 
     color: {

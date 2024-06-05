@@ -1,4 +1,3 @@
-import { View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { HStack } from '@shared/ui/HStack/HStack';
 import { SearchField } from '@shared/ui/SearchField/SearchField';
@@ -6,16 +5,23 @@ import { VStack } from '@shared/ui/VStack/VStack';
 import { useCalendarTriggerState } from '@widgets/CalendarRangeWidget/ui/CalendarRangeProvider';
 import { Button } from '@shared/ui/Button/ui/Button';
 import { styles } from './styles';
+import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 
 type LogInfoProps = {
   searchValue?: string;
   onSearch?: (value: string) => void;
+  navigator: NativeStackHeaderProps 
 };
 
 function LogInfo({
- searchValue, onSearch,
+  searchValue, onSearch, navigator,
 }: LogInfoProps) {
   const { setCalendarOpen } = useCalendarTriggerState();
+
+  function onMoveToNewLog() {
+    navigator.navigation.push('logbookPage');
+  }
+
   return (
     <HStack
       style={styles.tabWrapper}
@@ -35,15 +41,25 @@ function LogInfo({
           value={searchValue}
           onChangeText={(e) => onSearch && onSearch(e)}
           size="m"
+          addonBefore={(
+              <Button onPress={() => setCalendarOpen && setCalendarOpen(true)} type="clear">
+                <Icon
+                  size={16}
+                  name="clockcircle"
+                />
+              </Button>
+          )}
+          addonAfter={(
+            <Button onPress={() => onMoveToNewLog()} type="clear">
+            <Icon
+              size={16}
+              name="plus"
+            />
+            </Button>
+          )}
         />
       </VStack>
       {/* <Icon size={16} name="arrowdown" /> */}
-      <Button onPress={() => setCalendarOpen && setCalendarOpen(true)} type="clear">
-      <Icon
-        size={16}
-        name="clockcircle"
-      />
-      </Button>
     </HStack>
     // <View style={styles.tabWrapper}>
     //     <View style={styles.topDivesInfo}>

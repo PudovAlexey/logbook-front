@@ -3,10 +3,14 @@ import { Text as RneuiText } from '@rneui/themed';
 import { TitleProps, useStyle } from './styles';
 
 function Title(props: PropsWithChildren<TitleProps>) {
-  const { size = 3, style: parentStyle, children } = props;
+  const {
+ size = 3, style: parentStyle, children, ...otherProps
+} = props;
     const style = useStyle(props);
   return (
-<RneuiText style={{
+<RneuiText
+{...otherProps}
+style={{
     ...style[`h${size}`],
     ...parentStyle,
     ...style.color,

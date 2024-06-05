@@ -12,7 +12,7 @@ const useStyles = () => {
     },
     logInfo: {
       height: 56,
-      backgroundColor: theme.colors.colorFillSecondary(),
+      backgroundColor: theme.colors.colorFillPrimary(),
       borderBottomLeftRadius: 12,
       borderBottomRightRadius: 12,
       marginBottom: 24,
@@ -34,13 +34,14 @@ const useStyles = () => {
       // flexWrap: 'wrap',
     //   alignItems: 'center',
     //   justifyContent: 'center',
+    display: 'flex',
+    // width: windowWidth,
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    flexDirection: 'row',
       width: windowWidth,
     },
     scrollContainer: {
-      display: 'flex',
-    //   width: windowWidth,
-    //   flexWrap: 'wrap',
-    //   flexDirection: 'row',
     //   height: '100%', // Add a height property with a fixed value
     },
   });

@@ -8,7 +8,9 @@ function Caption({ children, style, ...props }:PropsWithChildren<CaptionProps>) 
 
     // const megredStyles = cn(styles[props.level], styles.color)
   return (
-    <Text style={{
+    <Text
+{...props}
+style={{
         ...styles[level],
         ...styles.color,
         ...style,

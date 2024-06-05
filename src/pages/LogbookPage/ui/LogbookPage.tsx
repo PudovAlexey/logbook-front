@@ -11,9 +11,13 @@ import { View, Text } from 'react-native';
 function LogbookPage({ route, navigation }: NativeStackHeaderProps) {
   const [logState, setLogState] = useState<GetLogInfoByIdResponse | null>(null);
   const logbookQuery = useLazyQuery(loginfoEndpoints.getLogInfoById);
-  const { tabId } = route.params as any;
+  const tabId = route?.params?.tabId;
 
   useEffect(() => {
+    if (!tabId) {
+      return;
+    }
+
     logbookQuery({ id: tabId }).then(({ data, error }) => {
       if (error) {
         return;

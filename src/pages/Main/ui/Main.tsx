@@ -1,39 +1,32 @@
 import React from 'react';
-import { Tab, Text, TabView } from '@rneui/themed';
-import { View, StyleSheet } from 'react-native';
-import { Button } from '@shared/ui/Button/ui/Button';
-import { useNotification } from '@shared/ui/AlertContext/ui/AlertContext';
+import { Tab, Text, TabView, useTheme } from '@rneui/themed';
+import { View, StyleSheet, Dimensions, } from 'react-native';
 import { LogbookTab } from '@widgets/LogBookTab/ui/LogbookTab/LogbookTab';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 
+const tabsHeight = 300;
+
 function Main(navigator: NativeStackHeaderProps) {
-  const notify = useNotification();
-  //  const {t} = useTranslation();
+  const windowHeight = Dimensions.get('window').height;
+
     const [index, setIndex] = React.useState(0);
 
-    const handleNotificationTest = () => {
-      notify?.notify({
-        status: 'error',
-        time: 2000,
-        message: 'Error message',
-        description: 'error descr',
-      });
-    };
+    const { theme } = useTheme();
 
     const styles = StyleSheet.create({
       container: {
         flex: 1,
-      //   backgroundColor: '#fff',
-      //   alignItems: 'center',
-      //   justifyContent: 'center',
-      //   width: 100,
       },
     });
 
     return (
         <View style={styles.container}>
-          <TabView value={index} onChange={setIndex} animationType="spring">
-            <TabView.Item style={{ backgroundColor: 'white', width: '100%' }}>
+          <TabView
+value={index}
+onChange={setIndex}
+animationType="spring"
+          >
+            <TabView.Item style={{ backgroundColor: 'white', width: '100%', height: windowHeight - tabsHeight }}>
               <LogbookTab navigator={navigator} />
               {/* <Button onPress={handleNotificationTest}>ckick</Button> */}
             </TabView.Item>
@@ -45,28 +38,52 @@ function Main(navigator: NativeStackHeaderProps) {
             </TabView.Item>
           </TabView>
           <Tab
+            dense
             value={index}
             onChange={(e) => setIndex(e)}
             // indicatorStyle={{
             //   backgroundColor: 'white',
             //   height: 3,
             // }}
-            variant="primary"
+            containerStyle={{
+              backgroundColor: theme.colors.colorFillPrimary(),
+            }}
+            // variant="primary"
           >
             <Tab.Item
               title="logbook"
-              titleStyle={{ fontSize: 12 }}
+              titleStyle={{ fontSize: 12, color: 'white' }}
               icon={{ name: 'timer', type: 'ionicon', color: 'white' }}
+              containerStyle={{
+                backgroundColor: theme.colors.colorFillPrimary(),
+                borderTopLeftRadius: 12,
+                borderTopRightRadius: 0,
+                borderBottomRightRadius: 0,
+                borderBottomLeftRadius: 0,
+              }}
+              // containerStyle={{
+              //   backgroundColor: 'rgba(0, 0, 0, .6)',
+              //   borderRadius: 0,
+              //   // borderTopLeftRadius: 12,
+              //   // borderTopRightRadius: 12,
+              // }}
             />
             <Tab.Item
+              // buttonStyle={{
+              //   backgroundColor: 'transparent',
+              // }}
               title="map"
-              titleStyle={{ fontSize: 12 }}
+              titleStyle={{ fontSize: 12, color: 'white' }}
               icon={{ name: 'heart', type: 'ionicon', color: 'white' }}
             />
             <Tab.Item
               title="ekip"
-              titleStyle={{ fontSize: 12 }}
+              titleStyle={{ fontSize: 12, color: 'white' }}
               icon={{ name: 'cart', type: 'ionicon', color: 'white' }}
+              containerStyle={{
+                backgroundColor: theme.colors.colorFillPrimary(),
+                borderTopRightRadius: 12,
+              }}
             />
           </Tab>
         </View>
