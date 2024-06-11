@@ -4,13 +4,13 @@ import { SearchField } from '@shared/ui/SearchField/SearchField';
 import { VStack } from '@shared/ui/VStack/VStack';
 import { useCalendarTriggerState } from '@widgets/CalendarRangeWidget/ui/CalendarRangeProvider';
 import { Button } from '@shared/ui/Button/ui/Button';
-import { styles } from './styles';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
+import { styles } from './styles';
 
 type LogInfoProps = {
   searchValue?: string;
   onSearch?: (value: string) => void;
-  navigator: NativeStackHeaderProps 
+  navigator: NativeStackHeaderProps
 };
 
 function LogInfo({
@@ -59,26 +59,7 @@ function LogInfo({
           )}
         />
       </VStack>
-      {/* <Icon size={16} name="arrowdown" /> */}
     </HStack>
-    // <View style={styles.tabWrapper}>
-    //     <View style={styles.topDivesInfo}>
-    //    <HStack justifyContent="flex-end" gap={8}>
-    //    <HStack width="auto" gap={4}>
-    //     <Icon name="clockcircle" size={30} />
-    //     <Text>12.06.2024</Text>
-    //    </HStack>
-    //     <HStack width="auto" gap={4}>
-    //     <Icon name="arrowdown" size={30} />
-    //     <Text>23 M</Text>
-    //     </HStack>
-    //    </HStack>
-    //     </View>
-    //     <View style={styles.mainBox}>
-    //     <SearchField />
-    //     <View style={styles.circleBox}><Text>Circle</Text></View>
-    //     </View>
-    // </View>
   );
 }
 

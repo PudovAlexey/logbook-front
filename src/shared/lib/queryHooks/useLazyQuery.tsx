@@ -5,6 +5,7 @@ import { formatQueryParams } from '../formatters/formatQueryParams';
 
 type UrlParams = {
   url: string
+  params: Record<string, string>
 }
 
 // eslint-disable-next-line no-unused-vars
@@ -26,7 +27,7 @@ function useLazyQuery<P, R>(endpointMutation: QueryEndpoint<P, R>) {
         params: endpoint.params,
       });
 
-      const url = `${process.env.API_URL}${endpoint.url}${queryParams}`;
+      const url = `${'http://10.96.183.36:8080/'}${endpoint.url}${queryParams}`;
 
     const query = await fetch(url, {
       headers: {
@@ -37,23 +38,27 @@ function useLazyQuery<P, R>(endpointMutation: QueryEndpoint<P, R>) {
     }).then(async (res) => {
       return res.json();
     }).then((res) => {
-      loggerPush({
-        title: `query ${url}`,
-        data: res,
-        color: 'query',
-      });
+      if (loggerPush) {
+        loggerPush({
+          title: `query ${url}`,
+          data: res,
+          color: 'query',
+        });
+      }
 
       return res;
     })
     .catch((error) => {
-       loggerPush({
-        title: `query ${url}`,
-        data: error,
-        color: 'queryError',
-      });
+       if (loggerPush) {
+        loggerPush({
+          title: `query ${url}`,
+          data: error,
+          color: 'queryError',
+        });
+       }
     });
     return query;
-  }, [endpointMutation, user?.access_token]);
+  }, [endpointMutation, user?.access_token, loggerPush]);
 }
 
 export {
