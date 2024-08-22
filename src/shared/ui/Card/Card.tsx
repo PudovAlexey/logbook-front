@@ -44,7 +44,7 @@ function Card(props: CardProps) {
         <Typography.Title size="6">{title}</Typography.Title>
         {/* <Typography.Caption>{description}</Typography.Caption> */}
         <Typography.Caption numberOfLines={2} ellipsizeMode="tail">
-        Очень длинное описание Очень длинное описание Очень длинное описание Очень длинное описание Очень длинное описание Очень длинное описание Очень длинное описание
+          {description}
         </Typography.Caption>
         {/* <Text style={style.testFont}>{title}</Text>
         <Text>{description}</Text> */}
