@@ -13,17 +13,32 @@ import { useEffect, useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import { Divider } from '@rneui/themed';
+import { Divider, Badge } from '@rneui/themed';
 import { formatDate } from '@shared/lib/formatters/formatDate';
 import { formatTime } from '@shared/lib/formatters/formatTime';
 import { useStyles } from './styles';
+import { useTranslation } from 'react-i18next';
+import { useDebounce } from '@shared/lib/hooks/useDebounce';
+import { useLazyMutation } from '@shared/lib/queryHooks/UseLazyMutation';
 
 function LogbookPage({ route, navigation }: NativeStackHeaderProps) {
   const styles = useStyles();
   const [editMode, setEditMode] = useState(false);
   const [logState, setLogState] = useState<GetLogInfoByIdResponse | null>(null);
+  const debouncedLogState = useDebounce(logState, 300);
   const logbookQuery = useLazyQuery(loginfoEndpoints.getLogInfoById);
+  const logbookMutation = useLazyMutation(loginfoEndpoints.putLogInfoList);
   const tabId = route?.params?.tabId;
+
+  useEffect(() => {
+    if (debouncedLogState) {
+      logbookMutation({
+        id: debouncedLogState?.id,
+        body: debouncedLogState
+
+      })
+    }
+  }, [debouncedLogState])
 
   useEffect(() => {
     if (!tabId) {
@@ -46,7 +61,7 @@ function LogbookPage({ route, navigation }: NativeStackHeaderProps) {
     <View style={styles.pageWrapper}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.titleWrapper}>
-      <View style={styles.text}>
+      <View style={styles.title}>
       <Typography.Title size="4">
             {logState.title}
       </Typography.Title>
@@ -170,7 +185,10 @@ function LogbookPage({ route, navigation }: NativeStackHeaderProps) {
 
         <View>
           <Typography.Title size="5">Заметки</Typography.Title>
-          <Input placeholder="напишите чтобы не забыть" />
+          <Input onChangeText={(e) => setLogState({
+            ...logState,
+            description: e
+          })} value={logState.description} placeholder="напишите чтобы не забыть" />
         </View>
 
         <View style={styles.photos}>

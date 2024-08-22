@@ -49,6 +49,10 @@ const useStyles = () => {
         buttonSave: {
             position: 'absolute',
             bottom: 0,
+            display: 'flex',
+            gap: 6,
+            paddingLeft: 12,
+            paddingRight: 12, 
             left: 0,
             right: 0,
 
@@ -74,6 +78,21 @@ const useStyles = () => {
             alignItems: 'center',
 
         },
+
+        title: {
+            display: 'flex',
+            flex: 1,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            gap: 4,
+            alignItems: 'center',
+        },
+
+        pressure: {
+            display: 'flex',
+            flex: 1,
+            flexDirection: 'row',
+        }
     });
 };
 
