@@ -108,6 +108,7 @@ function LogbookPage({ route, navigation }: NativeStackHeaderProps) {
                 date: logState.end_datetime,
               })}
           </Typography.Text>
+          <Button>Hello world</Button>
           </View>
             <FeatherIcon size={24} name="watch" />
         </View>
