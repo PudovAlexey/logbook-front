@@ -1,3 +1,5 @@
+import { UserResponseSchema } from "../loginEndpoints/types";
+
 type ChatEndpointResponseSchema = {
     description: string
     created_at: string
@@ -20,7 +22,7 @@ type ChatMessageSchema = {
 }
 
 type ChatMessageResponse = {
-    author: any
+    author: UserResponseSchema
     message: ChatMessageSchema
 }
 

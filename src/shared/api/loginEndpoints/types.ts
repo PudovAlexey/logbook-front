@@ -46,6 +46,21 @@ type RegisterVerifyParams = {
     }
 }
 
+type UserResponseSchema = {
+    avatar_id: number,
+    created_at: string,
+    date_of_birth: string,
+    email: string,
+    id: string,
+    is_verified: boolean,
+    name: string,
+    password: string,
+    patronymic: string,
+    role: string,
+    surname: string,
+    updated_at: string
+}
+
 export type {
     SubmitChangePasswordParams,
     RefreshTokensParams,
@@ -54,4 +69,5 @@ export type {
     LoginParams,
     RegisterUserParams,
     RegisterVerifyParams,
+    UserResponseSchema,
 };

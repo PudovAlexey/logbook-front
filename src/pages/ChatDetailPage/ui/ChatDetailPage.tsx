@@ -5,6 +5,7 @@ import { useLazyQuery } from "@shared/lib/queryHooks/useLazyQuery";
 import { useEffect, useState } from "react"
 import { View } from "react-native";
 import { GiftedChat } from "react-native-gifted-chat"
+import { transformMessagesData } from "../lib/transformMessagesData";
 
 // type ChatMessageSchema = {
 //     _id: number
@@ -22,7 +23,7 @@ function ChatDetailPage({ route, navigation }: NativeStackHeaderProps) {
         chatsQuery({id: chatId})
         .then(({data}) => {
             if (data) {
-                setMessages(data)
+                setMessages(transformMessagesData(data))
             }
         })
     }, []);
@@ -30,16 +31,14 @@ function ChatDetailPage({ route, navigation }: NativeStackHeaderProps) {
     
 
     return (
-         <View>
-            <Text>{JSON.stringify(messages)}</Text>
-         </View>
-    //     <GiftedChat
-    //     messages={[]}
-    //     // onSend={messages => this.onSend(messages)}
-    //     user={{
-    //       _id: 1
-    //     }}
-    //   />
+   
+        <GiftedChat
+        messages={messages}
+        // onSend={messages => this.onSend(messages)}
+        user={{
+          _id: 1
+        }}
+      />
     )
 }
 
