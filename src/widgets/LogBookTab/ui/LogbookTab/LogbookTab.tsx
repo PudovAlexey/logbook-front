@@ -45,25 +45,7 @@ function LogbookTab({ navigator }: LogbookTabProps) {
         </View>
  </ScrollView>
  </View>
-      {/* <PageWrapper>
-      </PageWrapper> */}
     </View>
-    // <VStack width={'100%'}>
-    //   <View style={styles.logInfo}>
-    //   {/* <LogInfo /> */}
-    //   <Text>test</Text>
-    //   </View>
-    //   <View style={styles.cardWrapper}>
-    //     {/* <View style={styles.card}><Text>1</Text></View>
-    //     <View style={styles.card}><Text>2</Text></View>
-    //     <View style={styles.card}><Text>3</Text></View>
-    //     <View style={styles.card}><Text>4</Text></View> */}
-    //     <Card />
-    //     <Card />
-    //     <Card />
-    //     <Card />
-    //   </View>
-    // </VStack>
   );
 }
 

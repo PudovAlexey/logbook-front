@@ -27,18 +27,18 @@ value={index}
 onChange={setIndex}
 animationType="spring"
           >
-            <TabView.Item style={{ backgroundColor: 'white', width: '100%', height: windowHeight - tabsHeight }}>
+            <TabView.Item style={{ width: '100%', height: windowHeight - tabsHeight }}>
               <LogbookTab navigator={navigator} />
               {/* <Button onPress={handleNotificationTest}>ckick</Button> */}
             </TabView.Item>
-            <TabView.Item style={{ backgroundColor: 'blue', width: '100%' }}>
+            <TabView.Item style={{width: '100%' }}>
               <Text h1>Favorite new</Text>
             </TabView.Item>
-            <TabView.Item style={{ backgroundColor: 'green', width: '100%' }}>
+            <TabView.Item style={{ width: '100%' }}>
               <Text h1>Cart</Text>
             </TabView.Item>
-            <TabView.Item style={{ backgroundColor: 'green', width: '100%' }}>
-              <ChatsListTab/>
+            <TabView.Item style={{ width: '100%' }}>
+              <ChatsListTab navigator={navigator}/>
             </TabView.Item>
           </TabView>
           <Tab

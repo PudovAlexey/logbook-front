@@ -6,6 +6,7 @@ import { RegisterPage } from '@pages/RegisterPage/ui/RegisterPage';
 import { RegisterVerificationCodePage } from '@pages/RegisterVerificationCodePage/ui/RegisterVerificationCodePage';
 import { LogbookPage } from '@pages/LogbookPage/ui/LogbookPage';
 import { User } from '../UserProvider/model/UserSlice';
+import { ChatDetailPage } from '@pages/ChatDetailPage/ui/ChatDetailPage';
 
 type AvailableScreensConfig = (user: User | null) => {
   name: string;
@@ -39,6 +40,10 @@ const availableScreensConfig: AvailableScreensConfig = (user) => {
 {
   'name': 'forgotPassword',
   component: ForgotPasswordPage,
+},
+{
+  'name': 'chatDetail',
+  component: ChatDetailPage,
 },
 {
   'name': 'logbookPage',
