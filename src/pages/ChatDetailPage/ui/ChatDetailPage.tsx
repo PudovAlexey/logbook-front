@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 import { View } from "react-native";
 import { GiftedChat } from "react-native-gifted-chat"
 import { transformMessagesData } from "../lib/transformMessagesData";
+import { useGetUser } from "@app/providers/UserProvider/ui/UserProvider";
 
 // type ChatMessageSchema = {
 //     _id: number
@@ -13,6 +14,7 @@ import { transformMessagesData } from "../lib/transformMessagesData";
 // }
 
 function ChatDetailPage({ route, navigation }: NativeStackHeaderProps) {
+    const { user } = useGetUser();
     const chatsQuery = useLazyQuery(chatEndpoints.getMessagesByChatId);
     const chatId = route?.params?.chatId;
 
@@ -36,7 +38,7 @@ function ChatDetailPage({ route, navigation }: NativeStackHeaderProps) {
         messages={messages}
         // onSend={messages => this.onSend(messages)}
         user={{
-          _id: 1
+          _id: user?.id || ''
         }}
       />
     )
