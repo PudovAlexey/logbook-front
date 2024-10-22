@@ -3,6 +3,7 @@ import { Tab, Text, TabView, useTheme } from '@rneui/themed';
 import { View, StyleSheet, Dimensions, } from 'react-native';
 import { LogbookTab } from '@widgets/LogBookTab/ui/LogbookTab/LogbookTab';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
+import { ChatsListTab } from '@widgets/ChatsListTab/ui/ChatsListTab';
 
 const tabsHeight = 300;
 
@@ -35,6 +36,9 @@ animationType="spring"
             </TabView.Item>
             <TabView.Item style={{ backgroundColor: 'green', width: '100%' }}>
               <Text h1>Cart</Text>
+            </TabView.Item>
+            <TabView.Item style={{ backgroundColor: 'green', width: '100%' }}>
+              <ChatsListTab/>
             </TabView.Item>
           </TabView>
           <Tab
@@ -78,6 +82,11 @@ animationType="spring"
             />
             <Tab.Item
               title="ekip"
+              titleStyle={{ fontSize: 12, color: 'white' }}
+              icon={{ name: 'cart', type: 'ionicon', color: 'white' }}
+            />
+            <Tab.Item
+              title="chats"
               titleStyle={{ fontSize: 12, color: 'white' }}
               icon={{ name: 'cart', type: 'ionicon', color: 'white' }}
               containerStyle={{
