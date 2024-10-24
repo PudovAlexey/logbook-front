@@ -27,7 +27,7 @@ function useLazyQuery<P, R>(endpointMutation: QueryEndpoint<P, R>) {
         params: endpoint.params,
       });
 
-      const url = `${'http://10.96.183.36:8082/'}${endpoint.url}${queryParams}`;
+      const url = `${process.env.API_URL}${endpoint.url}${queryParams}`;
 
     const query = await fetch(url, {
       headers: {

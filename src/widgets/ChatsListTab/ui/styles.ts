@@ -5,7 +5,7 @@ const useStyles = () => {
         masterDetailWrapper: {
             display: 'flex',
             alignItems: 'center',
-            gap: '10px',
+            gap: 10,
             flex: 1
         },
 

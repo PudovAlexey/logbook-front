@@ -16,6 +16,15 @@ const chatEndpoints = {
             url: `${BASE_ENDPOINT}/messages/${params.id}`,
             params,
         })
+    }),
+    sendMessage: builder.mutation<any, any>({
+        query: ({id, message}) => ({
+            url:   `${BASE_ENDPOINT}/create_message/${id}`,
+            method: 'POST',
+            body: {
+                text: message
+            }
+        })
     })
 }
 

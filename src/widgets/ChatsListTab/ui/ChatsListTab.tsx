@@ -1,8 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
-import { FlatList, Text, View } from "react-native"
-import { GiftedChat } from "react-native-gifted-chat";
+import { useEffect, useState } from "react";
+import { FlatList, View } from "react-native"
 import { useStyles } from "./styles";
-import { loginfoEndpoints } from "@shared/api/loginfoEndpoints/loginfoEndpoints";
 import { useLazyQuery } from "@shared/lib/queryHooks/useLazyQuery";
 import { chatEndpoints } from "@shared/api/chatEndpoints/chatEndpoints";
 import { ChatEndpointResponseSchema } from "@shared/api/chatEndpoints/types";

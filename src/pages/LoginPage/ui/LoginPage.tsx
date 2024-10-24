@@ -108,10 +108,17 @@ function LoginPage({ navigation }: NativeStackHeaderProps) {
             validationText: validationErrors?.email?.message,
             required: true,
           }}
-          onChangeText={(e) => setLoginForm((prev) => ({
+          onChangeText={(e) => {
+            setLoginForm((prev) => ({
               ...prev,
               login: e,
-            }))}
+            }))
+
+            notify?.notify({
+              'status': 'error',
+              message: process.env.API_URL || ''
+            })
+          }}
           value={loginForm.login}
         />
 
