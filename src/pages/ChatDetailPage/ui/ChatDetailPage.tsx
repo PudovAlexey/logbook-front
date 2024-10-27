@@ -31,7 +31,7 @@ function ChatDetailPage({ route, navigation }: NativeStackHeaderProps) {
         .then(({ data }) => {
             if (data) {
                 const socket = io('ws://192.168.1.36:8082');
-                 setMessages(transformMessagesData(data));
+                 setMessages(transformMessagesData(data.reverse()));
 
                 setSocket(socket);
             }
@@ -58,10 +58,6 @@ function ChatDetailPage({ route, navigation }: NativeStackHeaderProps) {
 
             setMessages((prev: any) => GiftedChat.append(prev, newMessage));
          });
-
-         // socket.on("joiner", (el) => {
-         //   console.log(el)
-         // });
 
          setSocket(socket);
        }
