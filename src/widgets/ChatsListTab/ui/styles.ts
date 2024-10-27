@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native"
+import { StyleSheet } from 'react-native';
 
 const useStyles = () => {
     return StyleSheet.create({
@@ -6,7 +6,7 @@ const useStyles = () => {
             display: 'flex',
             alignItems: 'center',
             gap: 10,
-            flex: 1
+            flex: 1,
         },
 
         chatItem: {
@@ -20,9 +20,9 @@ const useStyles = () => {
         // detail: {
 
         // }
-    })
-}
+    });
+};
 
 export {
-    useStyles
-}
+    useStyles,
+};

@@ -1,5 +1,4 @@
 import { Button } from '@shared/ui/Button/ui/Button';
-import { HStack } from '@shared/ui/HStack/HStack';
 import { Input } from '@shared/ui/Input/Input';
 import { VStack } from '@shared/ui/VStack/VStack';
 import { useEffect, useState } from 'react';
@@ -8,7 +7,7 @@ import { useBackandStatuses } from '@shared/lib/apiHooks/useBackandErrors';
 import { useNotification } from '@shared/ui/AlertContext/ui/AlertContext';
 import { PageWrapper } from '@shared/ui/PageWrapper/ui/PageWrapper';
 import {
- StyleSheet, Text, TextInput, View,
+ StyleSheet,
 } from 'react-native';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import { useStyles } from './styles';
@@ -112,12 +111,12 @@ function LoginPage({ navigation }: NativeStackHeaderProps) {
             setLoginForm((prev) => ({
               ...prev,
               login: e,
-            }))
+            }));
 
             notify?.notify({
               'status': 'error',
-              message: process.env.API_URL || ''
-            })
+              message: process.env.API_URL || '',
+            });
           }}
           value={loginForm.login}
         />

@@ -7,6 +7,7 @@ import { loginEndpoints } from '@shared/api/loginEndpoints/loginEndpoints';
 import { useAsyncStorage } from '@shared/lib/hooks/useAsyncStorage';
 import { RegisterUserParams } from '@shared/api/loginEndpoints/types';
 import { User, userSlice } from '../model/UserSlice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type LoginUserHandlers = {
   // eslint-disable-next-line no-unused-vars
@@ -134,6 +135,7 @@ const useLoginHandlers = () => {
   }, [loginMutation, setRefreshTimer, setRefreshToken, setUserId]);
 
   const logoutUserHandler: LoginUserHandlers['logoutUserHandler'] = async () => {
+    setUserId('');
     setRefreshToken('');
 
     return await logoutMutation(null);
