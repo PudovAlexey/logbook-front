@@ -7,10 +7,12 @@ import { Typography } from '@shared/ui/Typography';
 import { VStack } from '@shared/ui/VStack/VStack';
 import { useCallback } from 'react';
 import { View, Text } from 'react-native';
+import { useStyles } from './useStyles';
 
 function ProfilePage({ navigation }: NativeStackHeaderProps) {
   const { user } = useGetUser();
   const loginHandlers = useLoginHandlers();
+  const { wrapper, buttonBlock, mainBlock } = useStyles();
 
   const logoutHandler = useCallback(() => {
     loginHandlers?.logoutUserHandler();
@@ -26,17 +28,25 @@ function ProfilePage({ navigation }: NativeStackHeaderProps) {
   }
 
   return (
-    <View>
+    <View style={wrapper}>
+      <View style={mainBlock}>
       <UserAvatarEditor />
       <Typography.Text>{user?.email}</Typography.Text>
-      <Text>
-{formatDate({
-        date: user?.date_of_birth,
-      })}
-      </Text>
-      <Button onPress={logoutHandler}>logout</Button>
-      <Button onPress={removeAccauntHandler}>remove accaunt</Button>
+      </View>
+      <View style={buttonBlock}>
+        <Button onPress={logoutHandler}>logout</Button>
+        <Button onPress={removeAccauntHandler}>remove accaunt</Button>
+      </View>
     </View>
+    //     <View>
+    //       <UserAvatarEditor />
+    //       <Typography.Text>{user?.email}</Typography.Text>
+    //       <Text>
+    // {formatDate({
+    //         date: user?.date_of_birth,
+    //       })}
+    //       </Text>
+    //     </View>
   );
 
   // return (

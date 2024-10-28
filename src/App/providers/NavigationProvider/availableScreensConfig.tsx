@@ -5,8 +5,8 @@ import { ForgotPasswordPage } from '@pages/ForgotPasswordPage/ui/ForgotPasswordP
 import { RegisterPage } from '@pages/RegisterPage/ui/RegisterPage';
 import { RegisterVerificationCodePage } from '@pages/RegisterVerificationCodePage/ui/RegisterVerificationCodePage';
 import { LogbookPage } from '@pages/LogbookPage/ui/LogbookPage';
-import { User } from '../UserProvider/model/UserSlice';
 import { ChatDetailPage } from '@pages/ChatDetailPage/ui/ChatDetailPage';
+import { User } from '../UserProvider/model/UserSlice';
 
 type AvailableScreensConfig = (user: User | null) => {
   name: string;
