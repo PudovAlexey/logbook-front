@@ -33,7 +33,7 @@ function AlertContextProvider({ children }: PropsWithChildren) {
     if (!notificationQueue.length) return;
     const interval = setInterval(() => {
       setFireCheck(true);
-    }, 20000);
+    }, 300);
 
     // eslint-disable-next-line consistent-return
     return () => {
