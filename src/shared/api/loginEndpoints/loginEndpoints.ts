@@ -65,6 +65,13 @@ const loginEndpoints = {
             body,
         }),
     })),
+
+    getUserAvatarQuery: builder.query<string, {id: string}>((({
+        query: ({ id }) => ({
+            url: `get_avatar/${id}`,
+            params: {},
+        }),
+    }))),
 };
 
 export {

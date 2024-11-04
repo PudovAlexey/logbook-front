@@ -43,8 +43,8 @@ function LoginPage({ navigation }: NativeStackHeaderProps) {
   const loginHandlers = useLoginHandlers();
 
   const [loginForm, setLoginForm] = useState<LoginState>({
-    login: '',
-    password: '',
+    login: 'pudo-aleksej@yandex.ru',
+    password: 'Laborador1478!!!',
   });
 
   const createAccauntHandler = () => {

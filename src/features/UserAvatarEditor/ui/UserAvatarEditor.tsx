@@ -4,7 +4,12 @@ import { Avatar } from '@shared/ui/Avatar/ui/Avatar';
 import { Typography } from '@shared/ui/Typography';
 import { VStack } from '@shared/ui/VStack/VStack';
 
-function UserAvatarEditor() {
+type UserAvatarEditorProps = {
+    avatarUrl?: string
+    onAvatarChange?: () => void
+}
+
+function UserAvatarEditor({ avatarUrl, onAvatarChange }: UserAvatarEditorProps) {
     const { user } = useGetUser();
 
     if (!user) {
@@ -13,8 +18,16 @@ function UserAvatarEditor() {
 
   return (
     <VStack>
-        <Avatar
+        {avatarUrl ? (
+<Avatar
             rounded
+            onPress={onAvatarChange}
+            source={{ uri: avatarUrl }}
+/>
+) : (
+            <Avatar
+            rounded
+            onPress={onAvatarChange}
             // icon={{ name: "pencil", type: "font-awesome" }}
             title={formatUserName({
                 name: user.name,
@@ -23,7 +36,8 @@ function UserAvatarEditor() {
                 type: 'char',
             })}
             containerStyle={{ backgroundColor: '#9700b9' }}
-        />
+            />
+        )}
         <Typography.Text>
 {formatUserName({
             name: user.name,
